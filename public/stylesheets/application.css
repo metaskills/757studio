@@ -1,3 +1,43 @@
 
+body        { background-color:#000; margin:0; padding:0; }
+
+/* General Layout */
+
+#brick_tile   { 
+  height:197px; 
+  background-image: url('/images/layout/mh_brick_tile.jpg');
+}
+
+#brick_main   { 
+  height:197px; 
+  background-image: url('/images/layout/mh_brick_main.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#nav_tile {
+  height:63px;
+  background-image: url('/images/layout/mh_nav_tile.jpg');
+  background-position: center center;
+}
+
+#content {
+  margin: 0 auto;
+  width:1104px;
+  min-height:200px;
+  background-image: url('/images/layout/content_bg.gif');
+}
+
+#nav_shadow {
+  height:37px;
+  background-image: url('/images/layout/mh_nav_shadow_tile.png');
+}
+
+
+
+
+
+
+
 
 
