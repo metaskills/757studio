@@ -8,12 +8,30 @@
 !content_height = 1104px
 
 
+// Mixins
+
+=nomp
+  margin: 0
+  padding: 0
+
+=debug
+  border: 1px solid red
+
+=text_black_shadow
+  text-shadow: #000 1px 1px
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=1)
+
+=trans_black_bg_color
+  background-color: rgba(0,0,0,0.4)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#77000000,endColorstr=#77000000)
+  zoom: 1
+
+
 // General DOM
 
 body
+  +nomp
   background-color: #000
-  margin: 0
-  padding: 0
   color: #fff
 
 
@@ -64,32 +82,33 @@ body
         width: 530px
         top: 75px
         left: 490px
-        background-color: rgba(0,0,0,0.4)
+        +trans_black_bg_color
         position: absolute
         padding: 15px
         font-family: Tahoma, Geneva, sans-serif
         font-size: 16px
       #nav_items
+        +nomp
         position: absolute
-        top: 198px
-        left: 430px
+        top: 204px
+        left: 470px
         list-style-type: none
         font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
         text-transform: uppercase
         li
-          display: inline
+          +text_black_shadow
+          float: left
+          display: block
+          padding: 0
           margin: 0 15px 0 0
           color: #fff
-          a
-            &:link, &:visited
-              text-decoration: none
-              color: #fff
-              text-shadow: #000 1px 1px
-              font-size: 18px
-              padding: 10px
-            &:hover, &:active, &.active
-              text-decoration: none
-              background-color: rgba(0,0,0,0.4)
+          padding: 10px
+          &:hover, &:active, &.active
+            +trans_black_bg_color
+          a, a:link, a:visited, a:hover, a:active, a.active
+            color: #fff
+            text-decoration: none
+            font-size: 18px
 
 
 // Content
