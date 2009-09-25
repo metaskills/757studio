@@ -45,6 +45,7 @@ var ThePage = {
   
 };
 
+
 // TheSite class for simple global behavior.
 
 var TheSite = Class.create({
