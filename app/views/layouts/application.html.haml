@@ -1,0 +1,32 @@
+!!! strict
+
+%html{html_attrs}
+
+  %head
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    = stylesheet_link_tag :all, :recursive => true
+    = javascript_include_tag :all, :recursive => true
+
+  %body
+
+    %div#masthead
+      %div#brick_tile
+        %div#brick_main
+      %div#nav_tile
+      %div#masthead_cntarea
+        %div#masthead_cnt
+          %div#logo
+          %div#event_info
+            On <strong>November 5th, 2009</strong> Hampton Roads' premier learning and network 
+            event for software developers, interactive agencies, and technology entrepreneurs will 
+            be held at <strong>Grow Interactive, Norfolk</strong>.
+          %ul#nav_items
+            = top_nav 'Home'
+            = top_nav 'Who Should Attend'
+            = top_nav 'Presenters'
+            = top_nav 'Sponsors'
+
+    %div#content
+      %div#nav_shadow
+      = yield
+
