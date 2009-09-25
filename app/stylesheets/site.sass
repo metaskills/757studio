@@ -5,7 +5,11 @@
 !wood_height = 63px
 !wood_shadow = 37px
 !masthead_height = 260px
-!content_height = 1104px
+!content_lwidth = 788px
+!content_rwidth = 316px
+!content_width = !content_lwidth + !content_rwidth
+
+!s_yellow = #dec100
 
 
 // Mixins
@@ -65,7 +69,7 @@ body
     top: 0
     left: 0
     #masthead_cnt
-      width = !content_height
+      width = !content_width
       height = !masthead_height
       margin: 0 auto
       position: relative
@@ -115,13 +119,24 @@ body
 
 #content
   margin: 0 auto
-  width = !content_height
+  width = !content_width
   min-height: 200px
   background-image: url('/images/layout/content_bg.gif')
+  #nav_shadow
+    height = !wood_shadow
+    background-image: url('/images/layout/mh_nav_shadow_tile.png')
+  #content_left
+    +debug
+    h1
+      font-size: 41px
+      font-family: Impact, Charcoal, sans-serif
+      color = !s_yellow
+  #content_right
+    +debug
 
-#nav_shadow
-  height = !wood_shadow
-  background-image: url('/images/layout/mh_nav_shadow_tile.png')
+
+
+
 
 
 
