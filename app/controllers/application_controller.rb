@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   protected
   
   def current_page
-    params[:page].to_s.downcase
+    cp = params[:page].to_s.downcase
+    cp == 'home' ? 'index' : cp
   end
   
   
