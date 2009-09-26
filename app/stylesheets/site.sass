@@ -214,6 +214,7 @@ body
         padding: 0 0 0 23px
         margin: 0 12px 0 0
         color: #fff
+        background: url('/images/layout/info_misc.png') no-repeat center left
         &.blog
           background: url('/images/layout/info_blog.png') no-repeat center left
         &.linkedin
@@ -230,6 +231,14 @@ body
           +arial(14px)
         a:hover
           color = !s_yellow
+    
+    ul.presenter_books
+      list-style-type: none
+      font-style: italic
+      a, a:link, a:visited, a:active
+        border: none
+      a:hover
+        color = !s_grey
 
   #content_right
     width = !content_rwidth - 10px * 2

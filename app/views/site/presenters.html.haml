@@ -3,6 +3,44 @@
 
 
 
+/ Andy Hunt
+
+%div.presenter
+
+  = image_tag 'content/pragmatic_programmers_logo.png', :height => 70, :class => 'floatr'
+
+  %h2 Andy Hunt
+  %h3 Author &amp; Co-Founder Pragmatic Bookshelf
+
+  = image_tag 'content/andy_hunt.jpg', :height => 350, :class => 'presenter floatl mr30'
+  
+  %p
+    Andy Hunt is a programmer turned consultant, author and publisher. He has authored both 
+    award-winning and best-selling books, including <em>The Pragmatic Programmer</em>, 
+    <em>Practices of an Agile Developer</em>, and his newest title <em>Pragmatic Thinking and Learning</em>. 
+    
+  %ul.presenter_books
+    = content_tag :li, link_to('Pragmatic Thinking and Learning: Refactor Your Wetware', 'http://pragprog.com/titles/ahptl/pragmatic-thinking-and-learning')
+    = content_tag :li, link_to('The Pragmatic Programmer: From Journeyman to Master', 'http://www.pragprog.com/the-pragmatic-programmer')
+    = content_tag :li, link_to('Practices of an Agile Developer', 'http://www.pragprog.com/titles/pad/practices-of-an-agile-developer')
+    = content_tag :li, link_to("Programming Ruby: The Pragmatic Programmers' Guide", 'http://www.pragprog.com/titles/ruby/programming-ruby')
+    = content_tag :li, link_to('Pragmatic Unit Testing in Java with JUnit', 'http://www.pragprog.com/titles/utj/pragmatic-unit-testing-in-java-with-junit')
+    = content_tag :li, link_to('Pragmatic Version Control using CVS', 'http://www.pragprog.com/titles/vcc/pragmatic-version-control-using-cvs')
+  
+  %p
+    Andy was one of the 17 founders of the Agile Alliance and authors of the Agile Manifesto; 
+    and co-founded the 
+    = link_to('Pragmatic Bookshelf', 'http://pragprog.com/')+','
+    publishing award-winning and critically acclaimed 
+    books for software developers.
+
+  %ul.presenter_info
+    = info_link :info, 'http://pragprog.com/about'
+    = info_link :blog, 'http://andy.pragprog.com/'
+    = info_link :twitter, 'http://twitter.com/pragmaticandy'
+
+
+
 / Clinton Nixon
 
 %div.presenter
