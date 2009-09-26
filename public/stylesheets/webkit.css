@@ -1,0 +1,23 @@
+
+
+@-webkit-keyframes logodrop {
+ from { top: -200px; }
+ to { top: 83px; }
+}
+
+@-webkit-keyframes logoslide {
+ from { left: -300px; }
+ to { left: 9px; }
+}
+
+#masthead_cntarea #logo {
+  -webkit-animation-name: logoslide;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-iteration-count: 1;
+}
+
+img.presenter {
+  -webkit-box-reflect: below 2px
+  -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(0,0,0,0.2)))
+}
+
