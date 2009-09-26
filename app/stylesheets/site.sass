@@ -1,5 +1,5 @@
 
-// Global Vars / Interpolation
+// Variables
 
 !brick_height = 197px
 !wood_height = 63px
@@ -10,6 +10,8 @@
 !content_width = !content_lwidth + !content_rwidth
 
 !s_yellow = #dec100
+!s_red = #c93131
+!s_grey = #494949
 
 
 // Mixins
@@ -17,6 +19,17 @@
 =nomp
   margin: 0
   padding: 0
+
+=clearfix
+  display: block
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+  * html &
+    height: 1px
 
 =debug
   border: 1px solid red
@@ -30,6 +43,20 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#77000000,endColorstr=#77000000)
   zoom: 1
 
+=g_border10
+  border:
+    width: 10px 
+    style: solid 
+    color = !s_grey
+
+=trebuchet(!fsize)
+  font-family: Trebuchet MS, Helvetica, sans-serif
+  font-size = !fsize
+
+=lucida(!fsize)
+  font-family: 'Lucida Sans Unicode','Lucida Grande',sans-serif
+  font-size = !fsize
+
 
 // General DOM
 
@@ -37,6 +64,7 @@ body
   +nomp
   background-color: #000
   color: #fff
+  -webkit-text-stroke: 1px transparent
 
 
 // Masthead
@@ -97,7 +125,6 @@ body
         top: 204px
         left: 470px
         list-style-type: none
-        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
         text-transform: uppercase
         li
           +text_black_shadow
@@ -110,14 +137,15 @@ body
           &:hover, &:active, &.active
             +trans_black_bg_color
           a, a:link, a:visited, a:hover, a:active, a.active
+            +lucida(18px)
             color: #fff
             text-decoration: none
-            font-size: 18px
 
 
 // Content
 
 #content
+  +clearfix
   margin: 0 auto
   width = !content_width
   min-height: 200px
@@ -125,14 +153,51 @@ body
   #nav_shadow
     height = !wood_shadow
     background-image: url('/images/layout/mh_nav_shadow_tile.png')
+
   #content_left
-    +debug
+    width = !content_lwidth - 40px * 2
+    padding: 0 40px 60px 40px
+    float: left
+
     h1
-      font-size: 41px
+      margin-top: 0px
+      font-size: 38px
       font-family: Impact, Charcoal, sans-serif
+      font-weight: 100
       color = !s_yellow
+    h2
+      +trebuchet(32px)
+      font-weight: 100
+      margin: 5px 0
+    h3
+      +trebuchet(22px)
+      font-weight: 100
+      color = !s_red
+      margin: 5px 0
+    
+    p
+      +lucida(15px)
+      line-height: 24px
+      text-shadow: 0 0 0 #000
+    
+    img.presenter
+      +g_border10
+      margin: 10px 0 10px 0
+    
+    a, a:link, a:visited, a:active
+      color = !s_yellow
+      text-decoration: none
+      border-bottom:
+        width: 1px 
+        style: dashed 
+        color = !s_yellow
+      &:hover
+        border-bottom-style: none
+
   #content_right
-    +debug
+    width = !content_rwidth - 10px * 2
+    padding: 0 10px 10px 10px
+    float: right
 
 
 

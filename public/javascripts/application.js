@@ -73,6 +73,6 @@ var TheSite = Class.create({
 });
 
 document.observe('dom:loaded', function(){
-  window.theSite = new TheSite();
+  // window.theSite = new TheSite();
 });
 
