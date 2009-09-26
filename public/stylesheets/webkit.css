@@ -10,6 +10,10 @@
  to { left: 9px; }
 }
 
+body {
+  -webkit-text-stroke: 1px transparent
+}
+
 #masthead_cntarea #logo {
   -webkit-animation-name: logoslide;
   -webkit-animation-duration: 0.3s;

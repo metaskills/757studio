@@ -57,6 +57,14 @@
   font-family: 'Lucida Sans Unicode','Lucida Grande',sans-serif
   font-size = !fsize
 
+=arialblack(!fsize)
+  font-family: 'Arial Black', Gadget, sans-serif
+  font-size = !fsize
+
+=arial(!fsize)
+  font-family: Arial, Helvetica, sans-serif
+  font-size = !fsize
+
 
 // General DOM
 
@@ -130,7 +138,6 @@ body
           +text_black_shadow
           float: left
           display: block
-          padding: 0
           margin: 0 15px 0 0
           color: #fff
           padding: 10px
@@ -180,10 +187,6 @@ body
       line-height: 24px
       text-shadow: 0 0 0 #000
     
-    img.presenter
-      +g_border10
-      margin: 10px 0 10px 0
-    
     a, a:link, a:visited, a:active
       color = !s_yellow
       text-decoration: none
@@ -193,6 +196,36 @@ body
         color = !s_yellow
       &:hover
         border-bottom-style: none
+    
+    img.presenter
+      +g_border10
+      margin: 10px 0 10px 0
+    
+    ul.presenter_info
+      +nomp
+      list-style-type: none
+      li
+        float: left
+        display: block
+        padding: 0 0 0 23px
+        margin: 0 12px 0 0
+        color: #fff
+        &.blog
+          background: url('/images/layout/info_blog.png') no-repeat center left
+        &.linkedin
+          background: url('/images/layout/info_linkedin.png') no-repeat center left
+        &.code
+          background: url('/images/layout/info_code.png') no-repeat center left
+        &.twitter
+          background: url('/images/layout/info_twitter.png') no-repeat center left
+        a, a:link, a:visited, a:active
+          color: #fff
+          text-decoration: none
+          text-transform: uppercase
+          border: none
+          +arial(14px)
+        a:hover
+          color = !s_yellow
 
   #content_right
     width = !content_rwidth - 10px * 2

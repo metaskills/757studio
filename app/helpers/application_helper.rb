@@ -8,5 +8,9 @@ module ApplicationHelper
     end
   end
   
+  def info_link(type,href)
+    content_tag :li, link_to(type.to_s.titleize,href), :class => type.to_s
+  end
+  
   
 end
