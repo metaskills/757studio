@@ -20,15 +20,21 @@
             On <strong>November 5th, 2009</strong> Hampton Roads' premier learning and network 
             event for software developers, interactive agencies, and technology entrepreneurs will 
             be held at <strong>Grow Interactive, Norfolk</strong>.
-          %ul#nav_items
-            = top_nav 'Home'
-            = top_nav 'Who Should Attend'
-            = top_nav 'Presenters'
-            = top_nav 'Sponsors'
+          = top_nav
 
     #content
       #nav_shadow
       #content_left
         = yield
       #content_right Test
-        
+    
+    #footer
+      = bottom_nav
+      %br
+      %div{:class => 'mt5'}
+        Organized by the local Hampton Roads Ruby/Cocoa Users Groups. Info at 757rb.org and 757objc.org
+
+
+
+
+

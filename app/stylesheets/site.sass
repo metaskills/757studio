@@ -1,5 +1,5 @@
 
-// Variables
+/ Variables
 
 !brick_height = 197px
 !wood_height = 63px
@@ -14,7 +14,7 @@
 !s_grey = #494949
 
 
-// Mixins
+/ Mixins
 
 =nomp
   margin: 0
@@ -66,7 +66,7 @@
   font-size = !fsize
 
 
-// General DOM
+/ General DOM
 
 body
   +nomp
@@ -75,7 +75,7 @@ body
   -webkit-text-stroke: 1px transparent
 
 
-// Masthead
+/ Masthead
 
 #masthead
   position: relative
@@ -127,7 +127,7 @@ body
         padding: 15px
         font-family: Tahoma, Geneva, sans-serif
         font-size: 16px
-      #nav_items
+      #top_nav_items
         +nomp
         position: absolute
         top: 204px
@@ -149,7 +149,7 @@ body
             text-decoration: none
 
 
-// Content
+/ Content
 
 #content
   +clearfix
@@ -246,7 +246,32 @@ body
     float: right
 
 
+/ Footer
 
+#footer
+  margin: 0 auto
+  padding-top: 30px
+  padding-left: 40px
+  width = !content_width - 40px
+  height: 120px
+  color = !s_grey
+  background: url('/images/layout/footer_wood.jpg') no-repeat top left
+  #bottom_nav_items
+    +nomp
+    list-style-type: none
+    li
+      float: left
+      display: block
+      padding: 0 0 0 0
+      margin: 0 12px 0 0
+      a, a:link, a:visited, a:active
+        color = !s_red
+        text-decoration: none
+        text-transform: uppercase
+        border: none
+        +arial(14px)
+      a:hover
+        color = !s_yellow
 
 
 
