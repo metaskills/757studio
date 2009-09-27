@@ -4,17 +4,21 @@
 
 %table.data_table
   %tr
-    %th Name
-    %th Email
+    %th #
+    %th Name &amp; Email
     %th Company
     %th Attendees
     %th Reserved
-  - @rsvps.each do |r|
+    %th Actions
+  - @rsvps.each_with_index do |r,i|
     %tr{:class => cycle('even','odd')}
-      %td= r.name
-      %td= r.email
+      %td{:class => 'bold fs14'}= i+1
+      %td= r.name + '<br />' + mail_to(r.email)
       %td= r.company
       %td= r.attendees
       %td= r.reserved?
+      %td{:class => 'nowrap'}
+        = link_to '[Edit]', edit_rsvp_path(r)
+        = link_to '[Destroy]', rsvp_path(r), :method => :delete, :confirm => "Are you sure you want to delete #{r.name}'s reservation?"
 
 

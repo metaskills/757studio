@@ -75,12 +75,34 @@ body
   color: #fff
   -webkit-text-stroke: 1px transparent
 
-.vtop, .vtop_all *
-  vertical-align: top !important
-.vmiddle, .vmiddle_all *
-  vertical-align: middle !important
-.vbottom, .vbottom_all *
-  vertical-align: bottom !important
+table.data_table
+  +nomp
+  +lucida(12px)
+  width: 100%
+  border-collapse: collapse
+  color: black
+  font-weight: normal
+  border: 2px solid #c2c2c2
+  margin: 0 0 20px 0
+  padding: 8px
+  tr
+    &.even
+      background-color: #fff
+    &.odd
+      background-color: #f5fafa
+    &:hover
+      background-color: #cfc
+  th
+    background: #333
+    color: #fff
+    padding: 5px
+    border: 1px solid #222
+  td
+    padding: 7px
+    border: 1px solid #ddd
+    text-align: center
+    a, a:link, a:visited, a:active, a:hover
+      color = !s_red !important
 
 
 / Masthead

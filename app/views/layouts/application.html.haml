@@ -25,6 +25,9 @@
     #content
       #nav_shadow
       #content_left
+        - [:good,:bad,:indif].each do |fk|
+          %div{:class => "flash_#{fk}", :style => "display:#{flash[fk].blank? ? 'none' : 'block'};"}
+            %span= flash[fk]
         = yield
       #content_right
         #rsvp_button{:style => "display:#{current_rsvp ? 'none' : 'block'};"}
