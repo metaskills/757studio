@@ -12,6 +12,14 @@ class Rsvp < ActiveRecord::Base
   validates_presence_of :name, :email
   
   
+  after_create :send_email
+  
+  
+  protected
+  
+  def send_email
+    RsvpMailer.deliver_reservation(self) unless reserved?
+  end
   
   
 end

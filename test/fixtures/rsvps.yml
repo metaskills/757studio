@@ -1,0 +1,15 @@
+
+simple:
+  name: Bob Dobs
+  email: bob@dobs.com
+  company: The Syndicate
+  attendees: 1
+  reserved: false
+
+big:
+  name: Mr. Big
+  email: big@megacorp.com
+  company: Mega Corp
+  attendees: 4
+  reserved: true
+
