@@ -1,0 +1,6 @@
+
+admin:
+  email: test@admin.com
+  password: test
+  admin: true
+
