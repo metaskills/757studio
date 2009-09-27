@@ -5,6 +5,7 @@ simple:
   company: The Syndicate
   attendees: 1
   reserved: false
+  slug: ce78772b1e64a565a389
 
 big:
   name: Mr. Big
@@ -12,4 +13,5 @@ big:
   company: Mega Corp
   attendees: 4
   reserved: true
+  slug: db7d34d2ed31acf671a2
 
