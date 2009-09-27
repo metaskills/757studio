@@ -9,6 +9,8 @@ class Rsvp < ActiveRecord::Base
   
   attr_protected :reserved
   
+  validates_presence_of :name, :email
+  
   
   def likelyhood
     self[:likelyhood] || 2

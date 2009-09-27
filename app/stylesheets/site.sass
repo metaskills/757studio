@@ -175,6 +175,21 @@ body
       width: 160px
       font-size: 14px
   
+  .flash_good, .flash_bad, .flash_indif
+    margin: 10px auto
+    padding: 10px 10px 10px 35px
+    color: #000
+    +lucida(12px)
+  .flash_good
+    border: 2px solid #3c3
+    background: #cfc url('/images/layout/good.png') no-repeat 8px 10px
+  .flash_bad
+    border: 2px solid #f00
+    background: #fcc url('/images/layout/bad.png') no-repeat 8px 10px
+  .flash_indif
+    border: 2px solid #06f
+    background: #9cf url('/images/layout/indif.png') no-repeat 8px 10px
+  
   #content_left
     width = !content_lwidth - 40px * 2
     padding: 0 40px 60px 40px
@@ -275,6 +290,8 @@ body
       text-align: center
       +trebuchet(16px)
       color = !s_grey
+    .flash_good, .flash_bad, .flash_indif
+      width = 200px
 
 
 / Footer

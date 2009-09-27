@@ -1,11 +1,13 @@
 class ApplicationController < ActionController::Base
   
-  before_filter :setup_form_objects
+  protect_from_forgery
   
   helper :all
   helper_method :current_page
   
-  protect_from_forgery
+  rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid_record
+  
+  before_filter :setup_form_objects
   
   
   
@@ -18,6 +20,16 @@ class ApplicationController < ActionController::Base
   def current_page
     cp = params[:page].to_s.downcase
     cp == 'home' ? 'index' : cp
+  end
+  
+  def render_invalid_record(exception)
+    record = exception.record
+    respond_to do |format|
+      format.html { render :action => (record.new_record? ? 'new' : 'edit') }
+      format.js   { render :json => record.errors.full_messages, :status => :unprocessable_entity, :content_type => 'application/json' }
+      format.xml  { render :xml => record.errors.full_messages,  :status => :unprocessable_entity }
+      format.json { render :json => record.errors.full_messages, :status => :unprocessable_entity }
+    end
   end
   
   

@@ -1,78 +1,94 @@
 
-// Window Utility
+// TheSite class for simple global behavior.
 
-var ThePage = {
+var StudioApp = {
   
-  pageSize: function() { 
-    var xScroll, yScroll;
-    if (window.innerHeight && window.scrollMaxY) {	
-  		xScroll = window.innerWidth + window.scrollMaxX;
-  		yScroll = window.innerHeight + window.scrollMaxY;
-  	} else if (document.body.scrollHeight > document.body.offsetHeight){
-  		xScroll = document.body.scrollWidth;
-  		yScroll = document.body.scrollHeight;
-  	} else {
-  		xScroll = document.body.offsetWidth;
-  		yScroll = document.body.offsetHeight;
-  	}
-	  var windowWidth, windowHeight;
-  	if (self.innerHeight) {
-  		if(document.documentElement.clientWidth){
-  			windowWidth = document.documentElement.clientWidth; 
-  		} else {
-  			windowWidth = self.innerWidth;
-  		}
-  		windowHeight = self.innerHeight;
-  	} else if (document.documentElement && document.documentElement.clientHeight) {
-  		windowWidth = document.documentElement.clientWidth;
-  		windowHeight = document.documentElement.clientHeight;
-  	} else if (document.body) { 
-  		windowWidth = document.body.clientWidth;
-  		windowHeight = document.body.clientHeight;
-  	}	
-  	if(yScroll < windowHeight){
-  		pageHeight = windowHeight;
-  	} else { 
-  		pageHeight = yScroll;
-  	}
-  	if(xScroll < windowWidth){	
-  		pageWidth = xScroll;		
-  	} else {
-  		pageWidth = windowWidth;
-  	}
-  	return { width: pageWidth, height: pageHeight };
+  messagesToAlert: function(request) {
+    var messages = request.responseJSON;
+    var alertText = messages.join(".\n");
+    if (alertText.endsWith('.')) { alert(alertText); } else { alert(alertText+'.'); };
   }
   
 };
 
 
-// TheSite class for simple global behavior.
+// RSVP Form
 
-var TheSite = Class.create({
+var RsvpForm = Class.create({
   
   initialize: function() {
-    this.masthead = $('masthead');
-    this.brickTile = $('brick_tile');
-    this.navTile = $('nav_tile');
-    this.content = $('content');
+    this.button = $('rsvp_button');
+    this.text = $('rsvp_text');
+    this.form = $('rsvp_form');
+    this.flashGood = this.form.down('.flash_good');
+    this.flashBad = this.form.down('.flash_bad');
+    this.nameField = $('rsvp_name');
+    this.emailField = $('rsvp_email');
+    this.submit = $('rsvp_submit');
+    this.loading = $('rsvp_loading');
     this._initEvents();
   },
   
-  adjustContentHeight: function() {
-    var pageHeight = ThePage.pageSize().height;
-    var mastheadHeight = this.masthead.getHeight();
-    var contentHeight = pageHeight - mastheadHeight;
-    this.content.setStyle({height:contentHeight+'px'});
+  flash: function(mood,message) {
+    if (mood == 'good') {
+      this.flashBad.hide();
+      this.flashGood.update(message);
+      this.flashGood.show();
+    }
+    else {
+      this.flashGood.hide();
+      this.flashBad.update(message);
+      this.flashBad.show();
+    };
+  },
+  
+  showForm: function() {
+    this.button.blindUp({duration:0.5});
+    this.form.blindDown({duration:0.5});
+  },
+  
+  submitForm: function(event) {
+    event.stop();
+    if ($F(this.nameField).blank() || $F(this.emailField).blank()) {
+      this.flash('bad','Name an email are required.');
+      return false;
+    }
+    else {
+      this.loading.show();
+      new Ajax.Request(this.form.action,{
+        onComplete: this.completeRequest.bind(this),
+        parameters: this.form.serialize,
+        method: 'put'
+      });
+      this.form.disable();
+      return true;
+    };
+  },
+  
+  completeRequest: function(request) {
+    if (request.success()) {
+      this.loading.hide();
+      this.form.enable();
+      this.form.blindUp({duration:0.5});
+      this.flash('good','Thanks for your...');
+    }
+    else {
+      this.flash('bad','Any unknown error occured when sending your RSVP.');
+    };
   },
   
   _initEvents: function() {
-    this.adjustContentHeight();
-    Event.observe(window,'resize', this.adjustContentHeight.bindAsEventListener(this));
+    this.button.observe('click',this.showForm.bindAsEventListener(this));
+    this.form.observe('submit',this.submitForm.bindAsEventListener(this));
   }
   
 });
 
 document.observe('dom:loaded', function(){
-  // window.theSite = new TheSite();
+  window.rsvpForm = new RsvpForm();
 });
+
+
+
+
 

@@ -33,6 +33,8 @@
           is first come, first served.<br/> 
           RSVP now to help reserve yours.
         #rsvp_form{:style => 'display:none;'}
+          .flash_bad{:style => 'display:none;'}
+          .flash_good{:style => 'display:none;'}
           - form_for @rsvp do |f|
             %table.form_table
               %tr
@@ -52,8 +54,10 @@
                 %td= f.select :attendees, Rsvp::ATTENDEE_RANGE
               %tr
                 %th
-                %td= submit_tag 'Send RSVP'
-                  
+                %td
+                  = submit_tag 'Send RSVP', :id => 'rsvp_submit'
+                  = image_tag '/images/layout/loading.gif', :id => 'rsvp_loading', :style => 'display:none;'
+
     #footer
       = bottom_nav
       %br
