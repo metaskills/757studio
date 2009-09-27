@@ -8,6 +8,7 @@
 !content_lwidth = 788px
 !content_rwidth = 316px
 !content_width = !content_lwidth + !content_rwidth
+!rsvp_width = 278px
 
 !s_yellow = #dec100
 !s_red = #c93131
@@ -157,10 +158,23 @@ body
   width = !content_width
   min-height: 200px
   background-image: url('/images/layout/content_bg.gif')
+  
   #nav_shadow
     height = !wood_shadow
     background-image: url('/images/layout/mh_nav_shadow_tile.png')
-
+  
+  table.form_table
+    margin: 0 auto
+    th
+      +lucida(12px)
+      text-align: right
+      color = !s_red
+    td
+      text-align: left
+    input[type=text]
+      width: 160px
+      font-size: 14px
+  
   #content_left
     width = !content_lwidth - 40px * 2
     padding: 0 40px 60px 40px
@@ -244,6 +258,23 @@ body
     width = !content_rwidth - 10px * 2
     padding: 0 10px 10px 10px
     float: right
+    
+    #rsvp_button
+      width = !rsvp_width
+      height: 46px
+      margin: 0 auto
+      background: url('/images/content/rsvp_button.jpg') no-repeat 0 0
+      cursor: pointer
+      &:hover
+        background-position: 0 -46px
+      &:active
+        background-position: 0 -92px
+    #rsvp_text
+      width = !rsvp_width
+      margin: 5px auto
+      text-align: center
+      +trebuchet(16px)
+      color = !s_grey
 
 
 / Footer

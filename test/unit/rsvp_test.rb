@@ -13,6 +13,12 @@ class RsvpTest < ActiveSupport::TestCase
       @rsvp.attributes = {:reserved => true}
       assert !@rsvp.reserved?
     end
+    
+    should 'have a default likelyhood of 2' do
+      assert_equal 2, @rsvp.likelyhood
+      @rsvp.likelyhood = 3
+      assert_equal 3, @rsvp.likelyhood
+    end
 
   end
   

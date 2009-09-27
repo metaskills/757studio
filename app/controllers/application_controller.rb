@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   
+  before_filter :setup_form_objects
+  
   helper :all
   helper_method :current_page
   
@@ -8,6 +10,10 @@ class ApplicationController < ActionController::Base
   
   
   protected
+  
+  def setup_form_objects
+    @rsvp = Rsvp.new
+  end
   
   def current_page
     cp = params[:page].to_s.downcase

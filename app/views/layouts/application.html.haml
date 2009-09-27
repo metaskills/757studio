@@ -26,8 +26,34 @@
       #nav_shadow
       #content_left
         = yield
-      #content_right Test
-    
+      #content_right
+        #rsvp_button
+        #rsvp_text
+          Space is limited and seating<br/>
+          is first come, first served.<br/> 
+          RSVP now to help reserve yours.
+        #rsvp_form{:style => 'display:none;'}
+          - form_for @rsvp do |f|
+            %table.form_table
+              %tr
+                %th Name
+                %td= f.text_field :name
+              %tr
+                %th Company
+                %td= f.text_field :company
+              %tr
+                %th Email
+                %td= f.text_field :email
+              %tr
+                %th Coming?
+                %td= f.select :likelyhood, Rsvp::LIKELYHOOD_RANGE
+              %tr
+                %th Attendees
+                %td= f.select :attendees, Rsvp::ATTENDEE_RANGE
+              %tr
+                %th
+                %td= submit_tag 'Send RSVP'
+                  
     #footer
       = bottom_nav
       %br
