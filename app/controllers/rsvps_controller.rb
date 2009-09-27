@@ -7,7 +7,7 @@ class RsvpsController < ApplicationController
   end
   
   def create
-    @rsvp = Rsvp.create!(params[:rsvp])
+    self.current_rsvp = Rsvp.create!(params[:rsvp])
     head :ok
   end
   

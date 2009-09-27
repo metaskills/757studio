@@ -21,7 +21,8 @@ var RsvpForm = Class.create({
     this.text = $('rsvp_text');
     this.formDiv = $('rsvp_form');
     this.form = this.formDiv.down('form');
-    this.flashGood = $('rsvp_flash_good');
+    this.flashIndif = $('rsvp_flash_indif');
+    this.yourEmail = $('your_rsvp_email');
     this.flashBad = $('rsvp_flash_bad');
     this.nameField = $('rsvp_name');
     this.emailField = $('rsvp_email');
@@ -32,13 +33,13 @@ var RsvpForm = Class.create({
   },
   
   flash: function(mood,message) {
-    if (mood == 'good') {
+    if (mood == 'indif') {
       this.flashBad.hide();
-      this.flashGood.update(message);
-      this.flashGood.show();
+      this.yourEmail.update(message);
+      this.flashIndif.show();
     }
     else {
-      this.flashGood.hide();
+      this.flashIndif.hide();
       this.flashBad.update(message);
       this.flashBad.show();
     };
@@ -79,7 +80,7 @@ var RsvpForm = Class.create({
     if (response.request.success()) {
       this.form.reset();
       this.formDiv.blindUp({duration:0.5});
-      this.flash('good','Please verify your reservation by clicking the link contained in the email we just sent to you at ' + email + '.');
+      this.flash('indif',email);
     }
     else {
       this.flash('bad','Any unknown error occured when sending your RSVP.');

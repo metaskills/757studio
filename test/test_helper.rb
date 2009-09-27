@@ -22,5 +22,16 @@ class ActiveSupport::TestCase
     end
   end
   
+  def assert_element_visible(selector,visible=true)
+    style_regexp = visible ? /display:(inline|block);/ : /display:none;/
+    assert_select(selector) do
+      assert_select '[style=?]', style_regexp
+    end
+  end
+
+  def assert_element_hidden(selector)
+    assert_element_visible(selector,visible=false)
+  end
+  
   
 end

@@ -27,9 +27,12 @@
       #content_left
         = yield
       #content_right
-        #rsvp_button
-        .flash_good{:style => 'display:none;', :id => 'rsvp_flash_good'}
-        .flash_indif{:style => 'display:none;', :id => 'rsvp_flash_indif'}
+        #rsvp_button{:style => "display:#{current_rsvp ? 'none' : 'block'};"}
+        .flash_indif{:style => "display:#{current_rsvp ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
+          Please verify your reservation by clicking the link contained in 
+          the email we sent to you at: <strong id="your_rsvp_email">
+          = current_rsvp.try(:email)
+          </strong>
         #rsvp_text
           Space is limited to 55 seats and<br/>
           is first come, first served.<br/> 

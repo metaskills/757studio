@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper :all
-  helper_method :current_page
+  helper_method :current_page, :current_rsvp
   
   rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid_record
   
@@ -20,6 +20,17 @@ class ApplicationController < ActionController::Base
   def current_page
     cp = params[:page].to_s.downcase
     cp == 'home' ? 'index' : cp
+  end
+  
+  def current_rsvp=(rsvp)
+    @rsvp = rsvp
+    session[:rsvp_id] = rsvp.id
+  end
+  
+  def current_rsvp
+    unless @current_rsvp == false
+      @current_rsvp ||= session[:rsvp_id] ? Rsvp.find(session[:rsvp_id]) : false
+    end
   end
   
   def render_invalid_record(exception)
