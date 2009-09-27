@@ -1,8 +1,18 @@
 require 'test_helper'
 
 class RsvpsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  context 'For INDEX action' do
+
+    should 'allow authenticated admin to get page' do
+      login_as_admin
+      get :index
+      assert_response :success
+      assert_select 'h1', 'RSVPs'
+    end
+
   end
+  
+  
+  
 end

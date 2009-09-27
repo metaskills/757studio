@@ -1,0 +1,20 @@
+
+%h1 RSVPs
+
+
+%table.data_table
+  %tr
+    %th Name
+    %th Email
+    %th Company
+    %th Attendees
+    %th Reserved
+  - @rsvps.each do |r|
+    %tr{:class => cycle('even','odd')}
+      %td= r.name
+      %td= r.email
+      %td= r.company
+      %td= r.attendees
+      %td= r.reserved?
+
+

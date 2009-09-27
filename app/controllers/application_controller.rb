@@ -32,5 +32,12 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def admin_required
+    authenticate_or_request_with_http_basic('757Studio') do |email,password|
+      user = User.authenticate(email,password)
+      user.try(:admin?)
+    end
+  end
+  
   
 end
