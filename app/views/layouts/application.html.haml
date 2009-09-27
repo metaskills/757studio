@@ -28,13 +28,14 @@
         = yield
       #content_right
         #rsvp_button
+        .flash_good{:style => 'display:none;', :id => 'rsvp_flash_good'}
+        .flash_indif{:style => 'display:none;', :id => 'rsvp_flash_indif'}
         #rsvp_text
-          Space is limited and seating<br/>
+          Space is limited to 55 seats and<br/>
           is first come, first served.<br/> 
-          RSVP now to help reserve yours.
+          RSVP now and reserve yours!
         #rsvp_form{:style => 'display:none;'}
-          .flash_bad{:style => 'display:none;'}
-          .flash_good{:style => 'display:none;'}
+          .flash_bad{:style => 'display:none;', :id => 'rsvp_flash_bad'}
           - form_for @rsvp do |f|
             %table.form_table
               %tr
@@ -47,16 +48,14 @@
                 %th Email
                 %td= f.text_field :email
               %tr
-                %th Coming?
-                %td= f.select :likelyhood, Rsvp::LIKELYHOOD_RANGE
-              %tr
                 %th Attendees
                 %td= f.select :attendees, Rsvp::ATTENDEE_RANGE
               %tr
                 %th
-                %td
-                  = submit_tag 'Send RSVP', :id => 'rsvp_submit'
-                  = image_tag '/images/layout/loading.gif', :id => 'rsvp_loading', :style => 'display:none;'
+                %td{:class => 'vmiddle_all'}
+                  = submit_tag 'SEND', :id => 'rsvp_submit'
+                  %input{:type => 'button', :value => 'Cancel', :id => 'rsvp_cancel'}
+                  = image_tag '/images/layout/loading_invert.gif', :id => 'rsvp_loading', :style => 'display:none;'
 
     #footer
       = bottom_nav

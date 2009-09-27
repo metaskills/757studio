@@ -19,12 +19,14 @@ var RsvpForm = Class.create({
   initialize: function() {
     this.button = $('rsvp_button');
     this.text = $('rsvp_text');
-    this.form = $('rsvp_form');
-    this.flashGood = this.form.down('.flash_good');
-    this.flashBad = this.form.down('.flash_bad');
+    this.formDiv = $('rsvp_form');
+    this.form = this.formDiv.down('form');
+    this.flashGood = $('rsvp_flash_good');
+    this.flashBad = $('rsvp_flash_bad');
     this.nameField = $('rsvp_name');
     this.emailField = $('rsvp_email');
     this.submit = $('rsvp_submit');
+    this.cancel = $('rsvp_cancel');
     this.loading = $('rsvp_loading');
     this._initEvents();
   },
@@ -44,33 +46,40 @@ var RsvpForm = Class.create({
   
   showForm: function() {
     this.button.blindUp({duration:0.5});
-    this.form.blindDown({duration:0.5});
+    this.formDiv.blindDown({duration:0.5});
+  },
+  
+  hideForm: function() {
+    this.button.blindDown({duration:0.5});
+    this.formDiv.blindUp({duration:0.5});
   },
   
   submitForm: function(event) {
     event.stop();
     if ($F(this.nameField).blank() || $F(this.emailField).blank()) {
-      this.flash('bad','Name an email are required.');
+      this.flash('bad','Name and email are required.');
       return false;
     }
     else {
       this.loading.show();
       new Ajax.Request(this.form.action,{
         onComplete: this.completeRequest.bind(this),
-        parameters: this.form.serialize,
-        method: 'put'
+        parameters: this.form.serialize(),
+        method: 'post'
       });
       this.form.disable();
       return true;
     };
   },
   
-  completeRequest: function(request) {
-    if (request.success()) {
-      this.loading.hide();
-      this.form.enable();
-      this.form.blindUp({duration:0.5});
-      this.flash('good','Thanks for your...');
+  completeRequest: function(response) {
+    var email = $F(this.emailField);
+    this.loading.hide();
+    this.form.enable();
+    if (response.request.success()) {
+      this.form.reset();
+      this.formDiv.blindUp({duration:0.5});
+      this.flash('good','Please verify your reservation by clicking the link contained in the email we just sent to you at ' + email + '.');
     }
     else {
       this.flash('bad','Any unknown error occured when sending your RSVP.');
@@ -79,6 +88,7 @@ var RsvpForm = Class.create({
   
   _initEvents: function() {
     this.button.observe('click',this.showForm.bindAsEventListener(this));
+    this.cancel.observe('click',this.hideForm.bindAsEventListener(this));
     this.form.observe('submit',this.submitForm.bindAsEventListener(this));
   }
   
