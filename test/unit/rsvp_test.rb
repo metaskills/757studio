@@ -2,6 +2,9 @@ require 'test_helper'
 
 class RsvpTest < ActiveSupport::TestCase
   
+  should_validate_presence_of :name, :email
+  
+  
   context 'Instance behavior' do
 
     setup do
@@ -21,6 +24,7 @@ class RsvpTest < ActiveSupport::TestCase
     end
 
   end
+  
   
   
 end

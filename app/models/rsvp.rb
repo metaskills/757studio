@@ -12,9 +12,6 @@ class Rsvp < ActiveRecord::Base
   validates_presence_of :name, :email
   
   
-  def likelyhood
-    self[:likelyhood] || 2
-  end
   
   
 end
