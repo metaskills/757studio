@@ -27,6 +27,12 @@ class RsvpTest < ActiveSupport::TestCase
       @rsvp.save!
       assert @rsvp.slug.present?
     end
+    
+    should 'have a reserved! method that updates record in place' do
+      assert !@rsvp.reserved?
+      @rsvp.reserved!
+      assert @rsvp.reload.reserved?
+    end
 
   end
   

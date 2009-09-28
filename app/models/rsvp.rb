@@ -14,6 +14,10 @@ class Rsvp < ActiveRecord::Base
   before_validation :create_slug, :on => :create
   after_create :send_email
   
+  def reserved!
+    update_attribute :reserved, true
+  end
+  
   
   protected
   

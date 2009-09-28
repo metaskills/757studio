@@ -25,7 +25,7 @@ class RsvpMailerTest < ActionMailer::TestCase
       assert_equal @rsvp.email, email.to.first
       assert_equal RsvpMailer::FROM, email.from.first
       assert_match %r|Reservation Confirmation|, email.subject
-      assert_match %r|the following link.*http|m, email.body
+      assert_match %r|the following link.*http:\/\/757studio.org/rsvps/#{@rsvp.slug}/mine|m, email.body
     end
 
   end

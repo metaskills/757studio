@@ -23,14 +23,14 @@ class ApplicationController < ActionController::Base
   end
   
   def current_rsvp=(rsvp)
-    @rsvp = rsvp
-    session[:rsvp_id] = rsvp.id
+    session[:rsvp_id] = rsvp.try(:id)
   end
   
   def current_rsvp
-    unless @current_rsvp == false
-      @current_rsvp ||= session[:rsvp_id] ? Rsvp.find(session[:rsvp_id]) : false
-    end
+    @current_rsvp ||= begin
+      rsvp = Rsvp.find_by_id(session[:rsvp_id])
+      rsvp || false
+    end unless @current_rsvp == false
   end
   
   def render_invalid_record(exception)

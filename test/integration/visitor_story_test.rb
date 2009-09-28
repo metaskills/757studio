@@ -2,6 +2,10 @@ require 'test_helper'
 
 class VisitorStoryTest < ActionController::IntegrationTest
   
+  def setup
+    Rsvp.delete_all
+  end
+  
   should 'A basic user path' do
     # Get Home
     get_page :home
@@ -31,6 +35,15 @@ class VisitorStoryTest < ActionController::IntegrationTest
     get_page :presenters
     assert_element_hidden('div#rsvp_button')
     assert_element_visible('div#content_right div.flash_indif')
+    # Let's assume we clicked the link in the email
+    rsvp = Rsvp.first
+    get mine_rsvp_path(:id =>rsvp.slug)
+    assert_response :success
+    assert_select 'h1', 'My Registration'
+    assert_element_visible('div#rsvp_button')
+    assert_element_hidden('div#content_right div.flash_indif')
+    assert_select 'div.flash_indif', 'Thank you for confirming your reservation!'
+    
   end
   
   

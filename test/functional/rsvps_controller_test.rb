@@ -2,8 +2,6 @@ require 'test_helper'
 
 class RsvpsControllerTest < ActionController::TestCase
   
-  fixtures :all
-  
   def setup
     @rsvp = rsvps(:simple)
   end
@@ -31,6 +29,5 @@ class RsvpsControllerTest < ActionController::TestCase
   end
   
   
-  
-  
+    
 end
