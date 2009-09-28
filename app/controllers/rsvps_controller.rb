@@ -64,7 +64,7 @@ class RsvpsController < ApplicationController
   
   def update_rsvp_attributes
     @rsvp.update_attributes!(params[:rsvp])
-    flash[:good] = 'Updated reservation info.'
+    flash[:good] = 'Successfully updated reservation and attendee information.'
   end
   
   def not_found

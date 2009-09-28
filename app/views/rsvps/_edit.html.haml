@@ -13,9 +13,14 @@
     %th{:class => 'vtop pt10'} Additional Attendee Names:
     %td{:id => 'attendee_names'}
       - @rsvp.attendee_names.each_with_index do |name,index|
-        %div.attendee_name
-          = text_field_tag 'rsvp[attendee_names][]', name
+        %div{:class => 'attendee_name vmiddle_all pb10'}
+          = text_field_tag 'rsvp[attendee_names][]', name, :id => nil
   %tr
     %td
-    %td= submit_tag 'Update Registration', :style => 'width:auto;'
+    %td
+      = submit_tag 'Update Registration', :style => 'width:auto;'
+      = button_to_link 'Cancel', mine_rsvp_path(:id => @rsvp.slug), :style => 'width:auto;'
+
+
+= dom_loaded 'window.reservationForm = new ReservationForm();'
 

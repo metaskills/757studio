@@ -101,5 +101,78 @@ document.observe('dom:loaded', function(){
 
 
 
+var ReservationForm = Class.create({
+  
+  initialize: function() {
+    this.form = $('edit_rsvp_form');
+    this.attendeeNamesTd = $('attendee_names');
+    this._initEvents();
+  },
+  
+  nameDivs: function() {
+    return this.attendeeNamesTd.select('div.attendee_name');
+  },
+  
+  addImage: function() {
+    return this.attendeeNamesTd.down('img.addImg');
+  },
+  
+  deleteImages: function() {
+    return this.attendeeNamesTd.select('img.delImg');
+  },
+  
+  addDelImages: function() {
+    return this.attendeeNamesTd.select('img.addDelImg');
+  },
+  
+  addAttendee: function(event) {
+    var newFieldDiv = DIV({className:'attendee_name vmiddle_all pb10'},[INPUT({name:'rsvp[attendee_names][]',type:'text',value:''}),SPAN(' ')]);
+    this.attendeeNamesTd.insert({bottom:newFieldDiv});
+    this._buildAttendeeImages();
+  },
+  
+  deleteAttendee: function(event) {
+    var fieldDiv = event.element().up('div.attendee_name');
+    var field = fieldDiv.down('input');
+    var lastOne = this.nameDivs().size() == 1;
+    if (lastOne) {
+      field.clear();
+    } else {
+      fieldDiv.remove();
+      this._buildAttendeeImages();
+    };
+  },
+  
+  _buildAttendeeImages: function() {
+    this._destroyAttendeeImages();
+    var nameDivs = this.nameDivs();
+    var lastIndex = nameDivs.size()-1;
+    var addImg = IMG({src:'/images/layout/add.png',className:'p5 pointer addDelImg addImg'});
+    nameDivs.each(function(field,index){
+      var delImg = IMG({src:'/images/layout/delete.png',className:'p5 pointer addDelImg delImg'});
+      field.insert({bottom:delImg});
+      if (index == lastIndex) { field.insert({bottom:addImg}); };
+    });
+    this._initAttendeeImages();
+  },
+  
+  _destroyAttendeeImages: function() {
+    this.addDelImages().invoke('remove');
+  },
+  
+  _initAttendeeImages: function() {
+    this.addImage().observe('click',this.addAttendee.bindAsEventListener(this));
+    this.deleteImages().each(function(delImg){
+      delImg.observe('click',this.deleteAttendee.bindAsEventListener(this));
+    }.bind(this));
+  },
+  
+  _initEvents: function() {
+    this._buildAttendeeImages();
+  }
+
+});
+
+
 
 
