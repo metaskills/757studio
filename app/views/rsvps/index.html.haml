@@ -19,6 +19,7 @@
       %td= r.reserved?
       %td{:class => 'nowrap'}
         = link_to '[Edit]', edit_rsvp_path(r)
-        = link_to '[Destroy]', rsvp_path(r), :method => :delete, :confirm => "Are you sure you want to delete #{r.name}'s reservation?"
+        - if Rails.env.development?
+          = link_to '[Destroy]', rsvp_path(r), :method => :delete, :confirm => "Are you sure you want to delete #{r.name}'s reservation?"
 
 
