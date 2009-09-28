@@ -27,9 +27,13 @@ class RsvpsController < ApplicationController
   
   def mine
     @rsvp = Rsvp.find_by_slug!(params[:id])
-    clear_rsvp
-    flash.now[:indif] = "Thank you for confirming your reservation!" unless @rsvp.reserved?
-    @rsvp.reserved!
+    if request.get?
+      clear_rsvp
+      flash.now[:indif] = "Thank you for confirming your reservation!" unless @rsvp.reserved?
+      @rsvp.reserved!
+    elsif request.post?
+      
+    end
   end
   
   

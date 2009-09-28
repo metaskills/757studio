@@ -7,15 +7,21 @@ class Rsvp < ActiveRecord::Base
     ['Would Not Miss It!',3]
   ].freeze
   
-  attr_protected :reserved, :slug
-  
   validates_presence_of :name, :email, :slug
+  
+  serialize :attendee_names, Array
+  attr_protected :reserved, :slug
   
   before_validation :create_slug, :on => :create
   after_create :send_email
   
   def reserved!
     update_attribute :reserved, true
+  end
+  
+  def attendee_names=(names)
+    scrubbed_names = names.flatten.reject(&:blank?)
+    self[:attendee_names] = scrubbed_names
   end
   
   

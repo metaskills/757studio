@@ -33,6 +33,28 @@ class RsvpTest < ActiveSupport::TestCase
       @rsvp.reserved!
       assert @rsvp.reload.reserved?
     end
+    
+    context 'serialized attendee_names' do
+
+      setup do
+        @clean = ['Friend One','Coworker Two']
+        @with_blanks = @clean.dup.push('').unshift(nil).push(['Sub Name'])
+      end
+
+      should 'serialize basic array' do
+        @rsvp.attendee_names = @clean
+        assert @rsvp.save
+        assert_equal @clean, @rsvp.reload.attendee_names
+      end
+      
+      should 'scrup blank nil/empty values and compact sub arrays' do
+        @rsvp.attendee_names = @with_blanks
+        assert @rsvp.save
+        assert_equal ['Friend One','Coworker Two','Sub Name'], @rsvp.reload.attendee_names
+      end
+
+    end
+    
 
   end
   
