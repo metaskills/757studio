@@ -14,10 +14,24 @@ class RsvpsController < ApplicationController
   end
   
   def destroy
-    @rsvp = Rsvp.find(params[:id])
+    find_rsvp_id
     @rsvp.destroy
     flash[:good] = "Succesfully destroyed RSVP for #{@rsvp.name} with email of <#{@rsvp.email}>."
     redirect_to rsvps_url
+  end
+  
+  def edit
+    find_rsvp_id
+  end
+  
+  def update
+    find_rsvp_id
+    begin
+      update_rsvp_attributes
+      redirect_to edit_rsvp_url(@rsvp)
+    rescue ActiveRecord::RecordInvalid
+      render :action => 'edit'
+    end
   end
   
   def clear
@@ -33,8 +47,7 @@ class RsvpsController < ApplicationController
       @rsvp.reserved!
     elsif request.put?
       begin
-        @rsvp.update_attributes!(params[:rsvp])
-        flash[:good] = 'Updated reservation info.'
+        update_rsvp_attributes
         redirect_to mine_rsvp_url(:id => @rsvp.slug)
       rescue ActiveRecord::RecordInvalid
         render
@@ -44,6 +57,15 @@ class RsvpsController < ApplicationController
   
   
   protected
+  
+  def find_rsvp_id
+    @rsvp = Rsvp.find(params[:id])
+  end
+  
+  def update_rsvp_attributes
+    @rsvp.update_attributes!(params[:rsvp])
+    flash[:good] = 'Updated reservation info.'
+  end
   
   def not_found
     flash[:bad] = 'Reservation was not found.'

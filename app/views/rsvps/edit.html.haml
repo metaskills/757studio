@@ -1,0 +1,13 @@
+
+= render_rsvp_errors
+
+%div{:class => 'floatr'}
+  = button_to '« All RSVPs', rsvps_path, :method => :get
+
+%h1 Edit Registration
+
+
+- form_for @rsvp do |r|
+  = render :partial => 'edit', :locals => {:r => r}
+
+
