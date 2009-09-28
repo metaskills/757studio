@@ -23,13 +23,16 @@
           = top_nav
 
     #content
+    
       #nav_shadow
       #content_left
         - [:good,:bad,:indif].each do |fk|
           %div{:class => "flash_#{fk}", :style => "display:#{flash[fk].blank? ? 'none' : 'block'};"}
             %span= flash[fk]
         = yield
+      
       #content_right
+      
         #rsvp_stuff{:style => "display:#{current_rsvp && current_rsvp.reserved? ? 'none' : 'block'};"}
           #rsvp_button{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'none' : 'block'};"}
           .flash_indif{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
