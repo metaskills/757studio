@@ -209,6 +209,12 @@ table.data_table
     padding: 10px 10px 10px 35px
     color: #000
     +lucida(12px)
+    h2, p, ul
+      +nomp
+    h2
+      font-size: 18px !important
+    ul
+      margin-left: 15px
   .flash_good
     border: 2px solid #3c3
     background: #cfc url('/images/layout/good.png') no-repeat 8px 10px
@@ -297,6 +303,16 @@ table.data_table
         border: none
       a:hover
         color = !s_grey
+
+    #edit_rsvp_form
+      th
+        font-size: 16px
+      td
+        padding: 5px
+      input
+        font-size: 16px
+        width: 250px
+        
 
   #content_right
     width = !content_rwidth - 10px * 2

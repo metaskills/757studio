@@ -29,5 +29,28 @@ class RsvpsControllerTest < ActionController::TestCase
   end
   
   
+  context 'For MINE action' do
+
+    should 'be able to get page using slug' do
+      get :mine, :id => @rsvp.slug
+      assert_response :success
+      assert_select 'h1', 'My Registration'
+    end
+    
+    should 'be aboe to update attributes' do
+      new_name = 'Some Newname'
+      new_email = 'new@email.come'
+      new_comp = 'A New Company'
+      put :mine, :id => @rsvp.slug, :rsvp => {:name => new_name, :email => new_email, :company => new_comp}
+      assert_redirected_to mine_rsvp_path(:id => @rsvp.slug)
+      @rsvp.reload
+      assert_equal new_name, @rsvp.name
+      assert_equal new_email, @rsvp.email
+      assert_equal new_comp, @rsvp.company
+    end
+
+  end
+  
+  
     
 end

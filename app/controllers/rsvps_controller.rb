@@ -31,8 +31,14 @@ class RsvpsController < ApplicationController
       clear_rsvp
       flash.now[:indif] = "Thank you for confirming your reservation!" unless @rsvp.reserved?
       @rsvp.reserved!
-    elsif request.post?
-      
+    elsif request.put?
+      begin
+        @rsvp.update_attributes!(params[:rsvp])
+        flash[:good] = 'Updated reservation info.'
+        redirect_to mine_rsvp_url(:id => @rsvp.slug)
+      rescue ActiveRecord::RecordInvalid
+        render
+      end
     end
   end
   
@@ -40,6 +46,7 @@ class RsvpsController < ApplicationController
   protected
   
   def not_found
+    flash[:bad] = 'Reservation was not found.'
     redirect_to root_path
   end
   

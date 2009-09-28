@@ -1,0 +1,21 @@
+
+%table{:id => 'edit_rsvp_form', :class => 'form_table'}
+  %tr
+    %th Name:
+    %td= r.text_field :name
+  %tr
+    %th Email Address:
+    %td= r.text_field :email
+  %tr
+    %th Company Name:
+    %td= r.text_field :company
+  %tr
+    %th{:class => 'vtop pt10'} Additional Attendee Names:
+    %td{:id => 'attendee_names'}
+      - @rsvp.attendee_names.each_with_index do |name,index|
+        %div.attendee_name
+          = text_field_tag 'rsvp[attendee_names][]', name
+  %tr
+    %td
+    %td= submit_tag 'Update Registration', :style => 'width:auto;'
+

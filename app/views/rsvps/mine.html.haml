@@ -1,5 +1,14 @@
 
+= render_rsvp_errors
+
 %h1 My Registration
 
+%p
+  From this page, you will be able to edit your number of attendees and their names. 
+  If needed you will also be able to cancel your reservation. Seating is limited, so 
+  please let us know if your reservation changes!
+
+- form_for @rsvp, :url => mine_rsvp_path(:id => @rsvp.slug) do |r|
+  = render :partial => 'edit', :locals => {:r => r}
 
 

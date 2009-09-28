@@ -12,12 +12,12 @@ class Rsvp < ActiveRecord::Base
   serialize :attendee_names, Array
   attr_protected :reserved, :slug
   
-  before_validation :create_slug, :on => :create
+  before_validation :create_slug
   before_save  :sync_attendee_info
   after_create :send_email
   
   def reserved!
-    update_attribute :reserved, true
+    update_attribute :reserved, true unless reserved?
   end
   
   def attendee_names
@@ -42,7 +42,7 @@ class Rsvp < ActiveRecord::Base
   end
   
   def create_slug
-    self[:slug] = ActiveSupport::SecureRandom.hex(10)
+    self[:slug] ||= ActiveSupport::SecureRandom.hex(10)
   end
   
   def send_email
