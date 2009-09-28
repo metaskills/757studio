@@ -34,29 +34,35 @@ class RsvpTest < ActiveSupport::TestCase
       assert @rsvp.reload.reserved?
     end
     
-    context 'serialized attendee_names' do
+    context 'attendees & serialized attendee_names' do
 
       setup do
         @clean = ['Friend One','Coworker Two']
         @with_blanks = @clean.dup.push('').unshift(nil).push(['Sub Name'])
       end
+      
+      should 'be an empty array of names by default' do
+        assert_equal [], @rsvp.attendee_names
+      end
 
-      should 'serialize basic array' do
+      should 'serialize basic array and update attendees number' do
         @rsvp.attendee_names = @clean
         assert @rsvp.save
         assert_equal @clean, @rsvp.reload.attendee_names
+        assert_equal @rsvp.attendee_names.size, @rsvp.attendees
       end
       
-      should 'scrup blank nil/empty values and compact sub arrays' do
+      should 'scrup blank nil/empty values and compact sub arrays and auto update attendees number' do
         @rsvp.attendee_names = @with_blanks
         assert @rsvp.save
         assert_equal ['Friend One','Coworker Two','Sub Name'], @rsvp.reload.attendee_names
+        assert_equal @rsvp.attendee_names.size, @rsvp.attendees
       end
       
       should 'not create additonal attendee names for just one attendee' do
         @rsvp.attendees = 1
         assert @rsvp.save
-        assert_nil @rsvp.reload.attendee_names
+        assert_equal [], @rsvp.reload.attendee_names
       end
       
       should 'create unknown names for all additional attendees ' do

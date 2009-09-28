@@ -13,10 +13,15 @@ class Rsvp < ActiveRecord::Base
   attr_protected :reserved, :slug
   
   before_validation :create_slug, :on => :create
+  before_save  :sync_attendee_info
   after_create :send_email
   
   def reserved!
     update_attribute :reserved, true
+  end
+  
+  def attendee_names
+    self['attendee_names'].nil? ? default_attendee_names : unserialize_attribute('attendee_names')
   end
   
   def attendee_names=(names)
@@ -27,12 +32,13 @@ class Rsvp < ActiveRecord::Base
   
   protected
   
-  def validate
-    validate_attendee_info
+  def default_attendee_names
+    attendees == 1 ? [] : (attendees-1).times.map{ "Unknown" }
   end
   
-  def validate_attendee_info
-    self.attendee_names = (attendees-1).times.map{ "Unknown" } if attendees > 1
+  def sync_attendee_info
+    self.attendee_names = attendee_names
+    self.attendees =  attendee_names.size
   end
   
   def create_slug
