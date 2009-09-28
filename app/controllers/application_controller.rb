@@ -28,7 +28,11 @@ class ApplicationController < ActionController::Base
   
   def current_rsvp
     @current_rsvp ||= begin
-      rsvp = Rsvp.find_by_id(session[:rsvp_id])
+      rsvp = if @rsvp && !@rsvp.new_record?
+               @rsvp
+             else
+               Rsvp.find_by_id(session[:rsvp_id])
+             end
       rsvp || false
     end unless @current_rsvp == false
   end

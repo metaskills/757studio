@@ -40,9 +40,13 @@ class VisitorStoryTest < ActionController::IntegrationTest
     get mine_rsvp_path(:id =>rsvp.slug)
     assert_response :success
     assert_select 'h1', 'My Registration'
+    assert_element_hidden('div#rsvp_stuff')
+    # Can go to other page and see registration if needed
+    get_page :home
+    assert_select 'h1', '757Studio'
+    assert_element_visible('div#rsvp_stuff')
     assert_element_visible('div#rsvp_button')
     assert_element_hidden('div#content_right div.flash_indif')
-    assert_select 'div.flash_indif', 'Thank you for confirming your reservation!'
     
   end
   
