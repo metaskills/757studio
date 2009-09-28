@@ -21,7 +21,7 @@
     %td
     %td
       = submit_tag 'Update Registration', :style => 'width:auto;'
-      = button_to_link 'Cancel', mine_rsvp_path(:id => @rsvp.slug), :style => 'width:auto;'
+      = button_to_link 'Reset', mine_rsvp_path(:id => @rsvp.slug), :style => 'width:auto;'
 
 
 = dom_loaded 'window.reservationForm = new ReservationForm();'

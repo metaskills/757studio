@@ -1,6 +1,17 @@
 
 %h1 RSVPs
 
+%ul  
+  %li
+    There are 
+    = content_tag :strong, Rsvp.count
+    RSVPs, of which 
+    = content_tag :strong, Rsvp.count(:conditions =>{:reserved => true})
+    are reserved.
+  %li
+    There are a total of 
+    = content_tag :strong, Rsvp.attendees
+    registered attendees.
 
 %table.data_table
   %tr
@@ -16,7 +27,7 @@
       %td= r.name + '<br />' + mail_to(r.email)
       %td= r.company
       %td= r.attendees
-      %td= r.reserved?
+      %td= image_tag('/images/layout/good.png') if r.reserved?
       %td{:class => 'nowrap'}
         = link_to '[Edit]', edit_rsvp_path(r)
         - if Rails.env.development?

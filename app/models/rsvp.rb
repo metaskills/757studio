@@ -16,6 +16,15 @@ class Rsvp < ActiveRecord::Base
   before_save  :sync_attendee_info
   after_create :send_email
   
+  class << self
+    
+    def attendees
+      sum :attendees, :conditions => {:reserved => true}
+    end
+    
+  end
+  
+  
   def reserved!
     update_attribute :reserved, true unless reserved?
   end
