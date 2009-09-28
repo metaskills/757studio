@@ -27,6 +27,14 @@ class Rsvp < ActiveRecord::Base
   
   protected
   
+  def validate
+    validate_attendee_info
+  end
+  
+  def validate_attendee_info
+    self.attendee_names = (attendees-1).times.map{ "Unknown" } if attendees > 1
+  end
+  
   def create_slug
     self[:slug] = ActiveSupport::SecureRandom.hex(10)
   end

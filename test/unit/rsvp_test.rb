@@ -52,6 +52,18 @@ class RsvpTest < ActiveSupport::TestCase
         assert @rsvp.save
         assert_equal ['Friend One','Coworker Two','Sub Name'], @rsvp.reload.attendee_names
       end
+      
+      should 'not create additonal attendee names for just one attendee' do
+        @rsvp.attendees = 1
+        assert @rsvp.save
+        assert_nil @rsvp.reload.attendee_names
+      end
+      
+      should 'create unknown names for all additional attendees ' do
+        @rsvp.attendees = 3
+        assert @rsvp.save
+        assert_equal ['Unknown','Unknown'], @rsvp.reload.attendee_names
+      end
 
     end
     
