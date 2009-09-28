@@ -12,9 +12,11 @@
   %tr
     %th{:class => 'vtop pt10'} Additional Attendee Names:
     %td{:id => 'attendee_names'}
-      - @rsvp.attendee_names.each_with_index do |name,index|
-        %div{:class => 'attendee_name vmiddle_all pb10'}
-          = text_field_tag 'rsvp[attendee_names][]', name, :id => nil
+      - if @rsvp.attendees == 1
+        = render_attendee_row
+      - else
+        - @rsvp.attendee_names.each do |name|
+          = render_attendee_row(name)
   %tr
     %td
     %td

@@ -20,6 +20,11 @@ class Rsvp < ActiveRecord::Base
     update_attribute :reserved, true unless reserved?
   end
   
+  def attendees=(value)
+    value = 1 if value.blank? || value.to_i <= 0
+    self[:attendees] = value
+  end
+  
   def attendee_names
     self['attendee_names'].nil? ? default_attendee_names : unserialize_attribute('attendee_names')
   end

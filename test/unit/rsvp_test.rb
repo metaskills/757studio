@@ -10,6 +10,15 @@ class RsvpTest < ActiveSupport::TestCase
     setup do
       @rsvp = Rsvp.new(:name => 'Test', :email => 'test@test.com')
     end
+    
+    should 'never allow attendees to be 0' do
+      @rsvp.attendee_names = []
+      assert_equal 1, @rsvp.attendees
+      @rsvp.attendees = 0
+      assert_equal 1, @rsvp.attendees
+      @rsvp.attendees = -420
+      assert_equal 1, @rsvp.attendees
+    end
 
     should 'not allow mas assignment of default false reserved attribute' do
       assert !@rsvp.reserved?
