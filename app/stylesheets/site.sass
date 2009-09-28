@@ -44,9 +44,9 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#77000000,endColorstr=#77000000)
   zoom: 1
 
-=g_border10
+=g_border(!bSize = 10px)
   border:
-    width: 10px 
+    width = !bSize
     style: solid 
     color = !s_grey
 
@@ -245,6 +245,12 @@ table.data_table
       font-weight: 100
       color = !s_red
       margin: 5px 0
+    h4
+      +lucida(18px)
+      font-style: italic
+      font-weight: 100
+      margin: 2px 0
+      color = !s_yellow
     
     p
       +lucida(15px)
@@ -265,8 +271,10 @@ table.data_table
       margin: 10px 0 50px 0
     
     img.presenter
-      +g_border10
+      +g_border(10px)
       margin: 10px 0 10px 0
+      &.brd5
+        +g_border(5px)
     
     ul.presenter_info
       +nomp
