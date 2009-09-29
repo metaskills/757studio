@@ -6,14 +6,14 @@
 %div{:class => 'mb30'}
 
   - link_to site_path(:presenters,:anchor => 'andy_hunt') do
-    = image_tag 'content/andy_hunt.jpg', :width => 150, :class => 'presenter floatl mr30 brd5'
+    = image_tag 'content/andy_hunt.jpg', :width => 150, :class => 'presenter floatl mr30 brd5', :alt => 'Andy Hunt'
 
   %h2 Refactor Your Wetware???
   %h3 Andy Hunt
   %h4 Author &amp; Co-Founder Pragmatic Bookshelf
 
   %p
-    = image_tag 'content/left_right.png', :width => 190, :class => 'floatr ml10'
+    = image_tag 'content/left_right.png', :width => 190, :class => 'floatr ml10', :alt => 'Pragmatic Thinking and Learning: Refactor Your Wetware'
     Stub content for Andy's talk. Stub content for Andy's talk. Stub content for Andy's talk.
     Stub content for Andy's talk. Stub content for Andy's talk. Stub content for Andy's talk.
     Stub content for Andy's talk. Stub content for Andy's talk. Stub content for Andy's talk.
@@ -30,7 +30,7 @@
 %div{:class => 'mb30'}
 
   - link_to site_path(:presenters,:anchor => 'clinton_nixon') do
-    = image_tag 'content/clinton_nixon.jpg', :width => 220, :class => 'presenter floatl mr30 brd5'
+    = image_tag 'content/clinton_nixon.jpg', :width => 220, :class => 'presenter floatl mr30 brd5', :alt => 'Clinton Nixon'
 
   %h2 The Joy of Ruby
   %h3 Clinton R. Nixon
@@ -55,10 +55,10 @@
 
 / Jamie Pinkham
 
-%div{:class => 'mb30'}
+%div{:class => 'mb50'}
 
   - link_to site_path(:presenters,:anchor => 'jamie_pinkham') do
-    = image_tag 'content/jamie_pinkham.jpg', :width => 150, :class => 'presenter floatl mr30 brd5'
+    = image_tag 'content/jamie_pinkham.jpg', :width => 150, :class => 'presenter floatl mr30 brd5', :alt => 'Jamie Pinkham'
 
   %h2 iPhone Development: <br/>Touching Cocoa
   %h3 Jamie Pinkham
@@ -75,5 +75,40 @@
     Jamie will cover the development tools, programming paradigms and limitations 
     of the Objective-C and CocoaTouch at very abstract level. He will also 
     explain the mystery of the Objective-C's bracket syntax.
+
+
+
+%h1 Organized By
+
+%p
+  = image_tag 'content/ken_collins.jpg', :width => 150, :class => 'presenter floatr ml20 brd5', :alt => 'Ken Collins'
+  Ken Collins is a local software engineer that specializes in web 2.0 applications 
+  based on the Ruby on Rails framework and modern JavaScript libraries. He is the 
+  maintainer of the ActiveRecord SQL Server adapter that allows SQL Server 2000, 
+  2005 and 2008 to be utilized as a persistent object store for ruby. 
+
+%p
+  Ken works for Decisiv Inc, a Richmond based company that provides management solutions 
+  for the heavy trunk industry and in his off time he contributes to open source software 
+  and heads up the local user groups for Ruby and Objective-C.
+  
+%p
+  - link_to 'http://757objc.org/', :class => 'nobor' do
+    = image_tag 'content/757objc.png', :alt => 'Hampton Roads Cocoa/Obj-C Heads'
+  &nbsp;
+  - link_to 'http://757rb.org/', :class => 'nobor' do
+    = image_tag 'content/757rb.png', :alt => 'Hampton Roads Ruby Users Group'
+
+
+
+
+
+
+
+
+
+
+
+
 
 

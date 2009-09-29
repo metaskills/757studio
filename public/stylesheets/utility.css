@@ -17,6 +17,7 @@
 .floatl          { float:left; display:inline; }
 .inline          { display:inline !important; }
 .pointer         { cursor:pointer !important; }
+.nobor           { border-width: 0px !important; border-style: none !important; border-color: transparent !important; text-decoration: none !important;  }
 
 .white           { color:#fff !important; }
 .red             { color:red !important; }
