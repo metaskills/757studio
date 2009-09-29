@@ -41,12 +41,15 @@ class RsvpsControllerTest < ActionController::TestCase
       new_name = 'Some Newname'
       new_email = 'new@email.come'
       new_comp = 'A New Company'
-      put :mine, :id => @rsvp.slug, :rsvp => {:name => new_name, :email => new_email, :company => new_comp}
+      new_attendees = ['Some Otherguy']
+      put :mine, :id => @rsvp.slug, :rsvp => {:name => new_name, :email => new_email, :company => new_comp, :attendee_names => new_attendees}
       assert_redirected_to mine_rsvp_path(:id => @rsvp.slug)
       @rsvp.reload
       assert_equal new_name, @rsvp.name
       assert_equal new_email, @rsvp.email
       assert_equal new_comp, @rsvp.company
+      assert_equal new_attendees, @rsvp.attendee_names
+      assert_equal 2, @rsvp.attendees
     end
 
   end

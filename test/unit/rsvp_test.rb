@@ -58,14 +58,14 @@ class RsvpTest < ActiveSupport::TestCase
         @rsvp.attendee_names = @clean
         assert @rsvp.save
         assert_equal @clean, @rsvp.reload.attendee_names
-        assert_equal @rsvp.attendee_names.size, @rsvp.attendees
+        assert_equal @rsvp.attendee_names.size+1, @rsvp.attendees
       end
       
       should 'scrup blank nil/empty values and compact sub arrays and auto update attendees number' do
         @rsvp.attendee_names = @with_blanks
         assert @rsvp.save
         assert_equal ['Friend One','Coworker Two','Sub Name'], @rsvp.reload.attendee_names
-        assert_equal @rsvp.attendee_names.size, @rsvp.attendees
+        assert_equal @rsvp.attendee_names.size+1, @rsvp.attendees
       end
       
       should 'not create additonal attendee names for just one attendee' do

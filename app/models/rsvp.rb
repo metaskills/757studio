@@ -52,7 +52,7 @@ class Rsvp < ActiveRecord::Base
   
   def sync_attendee_info
     self.attendee_names = attendee_names
-    self.attendees =  attendee_names.size
+    self.attendees =  attendee_names.size + 1
   end
   
   def create_slug
