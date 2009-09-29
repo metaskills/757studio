@@ -20,7 +20,7 @@ class VisitorStoryTest < ActionController::IntegrationTest
     assert_response :success
     assert_select 'h1', 'Presenters'
     # Get Venue
-    get_page :venue
+    get_page :the_venue
     assert_response :success
     assert_select 'h1', 'The Venue'
     # Not Get RSVP index
