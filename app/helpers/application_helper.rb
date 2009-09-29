@@ -29,10 +29,10 @@ module ApplicationHelper
   def render_schedule(list=true)
     items = [
       '5:50 pm Doors Open',
-      '6:10 pm Andy Hunt',
-      '7:10 pm Clinton Nixon',
-      '8:00 pm Pragmatic Studio Giveaway',
-      '8:10 pm Jamie Pinkham',
+      '6:00 pm Andy Hunt',
+      '7:00 pm Clinton Nixon',
+      '7:45 pm Jamie Pinkham',
+      '8:15 pm Mixer',
       '9:00 pm Doors Close'
     ]
     if list

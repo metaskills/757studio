@@ -23,7 +23,7 @@
             be held at <strong>Grow Interactive, Norfolk</strong>.
           = top_nav
           #tiptop_email
-            = mail_to 'info@757studio.org', 'EMAIL'
+            = mail_to 'info@757studio.org', 'EMAIL: info@757studio.org'
           #tiptop_other
 
     #content
@@ -48,6 +48,7 @@
               %div{:class => 'mt5 right'}
                 = link_to '[clear]', clear_rsvp_path(current_rsvp), :method => :put
           #rsvp_text
+            ATTENDANCE IS FREE!<br/>
             Space is limited to 55 seats and<br/>
             is first come, first served.<br/> 
             RSVP now and reserve yours!
@@ -76,10 +77,39 @@
         
         #schedule
           %h5 Schedule
+          #schedule_date November 5th, 2009
           = render_schedule(false)
         
         #sponsors
+        
           %h5 Sponsors
+          
+          %div{:class => 'mt20 center'}
+            - link_to 'http://pragmaticstudio.com/' do
+              = image_tag '/images/content/studio-logo.png', :class => 'nobor', :alt => 'The Pragmatic Studio'
+            %p
+              Specializing in hands-on training for developers, taught by 
+              pragmatic authors and experts. Offering both private courses 
+              at your location on your schedule, and public courses on the 
+              more popular topics.
+            %p
+              Offering top developer training in iPhone SDK, Ruby on Rails, Advanced Ruby, 
+              Advanced Rails, Erlang in Practice, ExpressionEngine, Objective-C & Cocoa, Ruby,
+              Transitioning to Git, and Test-Driven Development with Rails.
+          
+          %div{:class => 'mt30 center'}
+            - link_to 'http://www.pragprog.com/' do
+              = image_tag '/images/content/pragbook-logo.jpg', :class => 'nobor', :alt => 'The Pragmatic Bookshelf'
+            %p{:style => 'padding: 0 5px;'}
+              The Pragmatic Programmers is an agile publishing and training company. We're here 
+              because we want to improve the lives of developers. We do this by creating timely, 
+              practical books and working with the Pragmatic Studio to create the best developer 
+              training there is.
+            %p
+              The Pragmatic Bookshelf offers books and video titles in the following categories: Career Development, 
+              Cascading Style Sheets (CSS), Design and Testing, Facets of Ruby, Geographic 
+              Information Systems, Introduction to Programming, iPhone Programming, Java / JVM,
+              Languages / Frameworks, Mac Programming, Mobile Programming, Programming Tools, and Web 2.0
 
     #footer
       = bottom_nav
