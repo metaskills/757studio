@@ -9,6 +9,8 @@
     = image_tag 'content/andy_hunt.jpg', :width => 150, :class => 'presenter floatl mr30 brd5', :alt => 'Andy Hunt'
 
   %h2 Refactor Your Wetware???
+  %ul{:class => 'presenter_info floatr'}
+    = info_link :more_info, site_path(:presenters,:anchor => 'andy_hunt')
   %h3 Andy Hunt
   %h4 Author &amp; Co-Founder Pragmatic Bookshelf
 
@@ -33,6 +35,8 @@
     = image_tag 'content/clinton_nixon.jpg', :width => 220, :class => 'presenter floatl mr30 brd5', :alt => 'Clinton Nixon'
 
   %h2 The Joy of Ruby
+  %ul{:class => 'presenter_info floatr'}
+    = info_link :more_info, site_path(:presenters,:anchor => 'clinton_nixon')
   %h3 Clinton R. Nixon
   %h4 Development Directory at Viget Labs
 
@@ -61,6 +65,8 @@
     = image_tag 'content/jamie_pinkham.jpg', :width => 150, :class => 'presenter floatl mr30 brd5', :alt => 'Jamie Pinkham'
 
   %h2 iPhone Development: <br/>Touching Cocoa
+  %ul{:class => 'presenter_info floatr'}
+    = info_link :more_info, site_path(:presenters,:anchor => 'jamie_pinkham')
   %h3 Jamie Pinkham
   %h4 Software Engineer at Mobelux
 
@@ -72,9 +78,9 @@
     development layer of Mac OS X and iPhone.
     
   %p 
-    Jamie will cover the development tools, programming paradigms and limitations 
-    of the Objective-C and CocoaTouch at very abstract level. He will also 
-    explain the mystery of the Objective-C's bracket syntax.
+    Jamie will cover the development tools, programming paradigms and limitations of 
+    iPhone development (including the Cocoa Touch API and the Objective-C programming language) 
+    at very abstract level. He will also reveal the mystery of the Objective-C's bracket syntax.
 
 
 
@@ -91,8 +97,13 @@
   Ken works for Decisiv Inc, a Richmond based company that provides management solutions 
   for the heavy trunk industry and in his off time he contributes to open source software 
   and heads up the local user groups for Ruby and Objective-C.
-  
+
 %p
+  %ul{:class => 'presenter_info floatr'}
+    = info_link :blog, 'http://www.metaskills.net/'
+    = info_link :twitter, 'http://twitter.com/metaskills'
+    = info_link :code, 'http://github.com/metaskills'
+    = info_link :linkedin, 'http://www.linkedin.com/in/metaskills'
   - link_to 'http://757objc.org/', :class => 'nobor' do
     = image_tag 'content/757objc.png', :alt => 'Hampton Roads Cocoa/Obj-C Heads'
   &nbsp;
