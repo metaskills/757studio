@@ -10,7 +10,7 @@ class VisitorStoryTest < ActionController::IntegrationTest
     # Get Home
     get_page :home
     assert_response :success
-    assert_select 'h1', '757Studio'
+    assert_select 'h1', 'Presentations/Talks'
     # Get Who Should Attend Page
     get_page :who_should_attend
     assert_response :success
@@ -19,10 +19,10 @@ class VisitorStoryTest < ActionController::IntegrationTest
     get_page :presenters
     assert_response :success
     assert_select 'h1', 'Presenters'
-    # Get Sponsors
-    get_page :sponsors
+    # Get Venue
+    get_page :venue
     assert_response :success
-    assert_select 'h1', 'Sponsors'
+    assert_select 'h1', 'The Venue'
     # Not Get RSVP index
     get rsvps_path
     assert_response :unauthorized
@@ -43,7 +43,7 @@ class VisitorStoryTest < ActionController::IntegrationTest
     assert_element_hidden('div#rsvp_stuff')
     # Can go to other page and see registration if needed
     get_page :home
-    assert_select 'h1', '757Studio'
+    assert_select 'h1', 'Presentations/Talks'
     assert_element_visible('div#rsvp_stuff')
     assert_element_visible('div#rsvp_button')
     assert_element_hidden('div#content_right div.flash_indif')

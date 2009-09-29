@@ -1,6 +1,6 @@
 module ApplicationHelper
   
-  NAV_PAGES = ['Home','Who Should Attend','Presenters','Sponsors']
+  NAV_PAGES = ['Home','Who Should Attend','Presenters','Venue']
   
   def top_nav
     content_tag :ul, :id => 'top_nav_items' do
