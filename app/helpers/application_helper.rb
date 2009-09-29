@@ -26,14 +26,20 @@ module ApplicationHelper
     content_tag :li, link_to(type.to_s.titleize,href), :class => type.to_s
   end
   
-  def render_schedule
-    items = ['5:50 pm Doors Open',
-             '6:10 pm Andy Hunt',
-             '7:10 pm Clinton Nixon',
-             '8:00 pm Free Pragmatic Studio Drawing',
-             '8:10 pm Jamie Pinkham',
-             '9:00 pm Doors Close'].map { |period| content_tag(:li,period) }
-    content_tag :ul, items
+  def render_schedule(list=true)
+    items = [
+      '5:50 pm Doors Open',
+      '6:10 pm Andy Hunt',
+      '7:10 pm Clinton Nixon',
+      '8:00 pm Pragmatic Studio Giveaway',
+      '8:10 pm Jamie Pinkham',
+      '9:00 pm Doors Close'
+    ]
+    if list
+      content_tag :ul, items.map{ |period| content_tag(:li,period) }
+    else
+      items.map { |period| content_tag(:span,period)+'<br/>' }
+    end
   end
   
   def dom_loaded(snippet)

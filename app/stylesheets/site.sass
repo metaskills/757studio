@@ -331,9 +331,25 @@ table.data_table
         
 
   #content_right
-    width = !content_rwidth - 10px * 2
-    padding: 0 10px 10px 10px
+    +lucida(14px)
+    width = !content_rwidth - 20px * 2
+    padding: 0 20px 30px 20px
     float: right
+    
+    h5
+      +trebuchet(22px)
+      font-weight: 100
+      color = !s_red
+      margin: 5px 0
+      text-align: center
+      padding-bottom: 3px
+      border-bottom: 
+        width: 1px
+        style: dashed
+        color = !s_grey
+    
+    ul
+      +lucida(12px)
     
     #rsvp_button
       width = !rsvp_width
@@ -350,9 +366,15 @@ table.data_table
       margin: 5px auto
       text-align: center
       +trebuchet(16px)
-      color = !s_grey
+      color = !s_grey + #fff
     .flash_good, .flash_bad, .flash_indif
       width = 200px
+    
+    #schedule
+      +lucida(12px)
+      margin: 20px 0
+      text-align: center
+    
 
 
 / Footer

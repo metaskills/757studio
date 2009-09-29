@@ -71,8 +71,12 @@
                     %input{:type => 'button', :value => 'Cancel', :id => 'rsvp_cancel'}
                     = image_tag '/images/layout/loading_invert.gif', :id => 'rsvp_loading', :style => 'display:none;'
         
+        #schedule
+          %h5 Schedule
+          = render_schedule(false)
+        
         #sponsors
-          %h1 Sponsors
+          %h5 Sponsors
 
     #footer
       = bottom_nav
