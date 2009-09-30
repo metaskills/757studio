@@ -11,5 +11,19 @@ module RsvpsHelper
     end
   end
   
+  def render_toggle_reservation_area
+    action_path = toggle_reservation_rsvp_path(:id => @rsvp.slug)
+    if @rsvp.reserved?
+      reserved_flag = image_tag('/images/layout/flag_reserved.png')
+      action = button_to('Cancel Reservation', action_path, :method => :put, :confirm => 'Are you sure you want to cancel your reservation?')
+    else
+      reserved_flag = image_tag('/images/layout/flag_not_reserved.png')
+      action = Rsvp.open_seats? ? button_to('Make Reservation', action_path, :method => :put) : 'No Seats Available'
+    end
+    content_tag :div, :class => 'center' do
+      reserved_flag + '<br/>' + action
+    end
+  end
+  
   
 end

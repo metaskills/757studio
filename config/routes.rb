@@ -3,7 +3,11 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'site'
   
   map.resources :rsvps, 
-                :member => {:clear => :put, :mine => [:get,:put]}
+                :member => {
+                  :clear => :put, 
+                  :mine  => [:get,:put],
+                  :toggle_reservation => :put
+                }
   
   map.site    ':page',  :controller => 'site',  :action => 'show'
   

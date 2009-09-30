@@ -50,6 +50,10 @@ class Rsvp < ActiveRecord::Base
   
   protected
   
+  def validate
+    errors.add :reservation, 'can not be confirmed because all seats are currently taken' if reserved? && !open_seats?
+  end
+  
   def default_attendee_names
     attendees == 1 ? [] : (attendees-1).times.map{ "Unknown" }
   end

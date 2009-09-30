@@ -54,6 +54,14 @@ class RsvpTest < ActiveSupport::TestCase
       assert @rsvp.reload.reserved?
     end
     
+    should 'be able to create new unreserved rsvps when open seats are false' do
+      Rsvp.stubs(:open_seats? => false)
+      assert_nothing_raised() { @rsvp.save! }
+      @rsvp.toggle(:reserved)
+      assert_raise(ActiveRecord::RecordInvalid) { @rsvp.save! }
+      assert @rsvp.errors.on(:reservation)
+    end
+    
     context 'attendees & serialized attendee_names' do
 
       setup do

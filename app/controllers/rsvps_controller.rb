@@ -1,6 +1,6 @@
 class RsvpsController < ApplicationController
   
-  before_filter :admin_required, :except => [:create,:clear,:mine]
+  before_filter :admin_required, :except => [:create,:clear,:mine,:toggle_reservation]
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
@@ -40,11 +40,10 @@ class RsvpsController < ApplicationController
   end
   
   def mine
-    @rsvp = Rsvp.find_by_slug!(params[:id])
+    find_by_slug
     if request.get?
       clear_rsvp
-      flash.now[:indif] = "Thank you for confirming your reservation!" unless @rsvp.reserved?
-      @rsvp.reserved!
+      @rsvp.reserved! unless session[:toggled_reservation]
     elsif request.put?
       begin
         update_rsvp_attributes
@@ -55,11 +54,24 @@ class RsvpsController < ApplicationController
     end
   end
   
+  def toggle_reservation
+    find_by_slug
+    session[:toggled_reservation] = true
+    @rsvp.toggle(:reserved).save!
+    redirect_to mine_rsvp_url(:id => @rsvp.slug)
+  rescue ActiveRecord::RecordInvalid
+    render :action => 'mine'
+  end
+  
   
   protected
   
   def find_rsvp_id
     @rsvp = Rsvp.find(params[:id])
+  end
+  
+  def find_by_slug
+    @rsvp = Rsvp.find_by_slug!(params[:id])
   end
   
   def update_rsvp_attributes

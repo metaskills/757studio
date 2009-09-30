@@ -39,7 +39,7 @@
       
         #rsvp_stuff{:style => "display:#{current_rsvp && current_rsvp.reserved? ? 'none' : 'block'};"}
           #rsvp_button{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'none' : 'block'};"}
-          .flash_indif{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
+          .flash_indif{:style => "display:#{current_rsvp && !current_rsvp.reserved? && !session[:toggled_reservation] ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
             Please verify your reservation by clicking the link contained in 
             the email we sent to you at: <strong id="your_rsvp_email">
             = current_rsvp.try(:email)

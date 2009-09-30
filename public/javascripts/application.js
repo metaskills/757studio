@@ -126,7 +126,7 @@ var ReservationForm = Class.create({
   },
   
   addAttendee: function(event) {
-    var newFieldDiv = DIV({className:'attendee_name vmiddle_all pb10'},[INPUT({name:'rsvp[attendee_names][]',type:'text',value:''}),SPAN(' ')]);
+    var newFieldDiv = DIV({className:'attendee_name vmiddle_all pb10'},[INPUT({name:'rsvp[attendee_names][]',type:'text',value:''})]);
     this.attendeeNamesTd.insert({bottom:newFieldDiv});
     this._buildAttendeeImages();
   },
