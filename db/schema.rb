@@ -9,14 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090928135141) do
+ActiveRecord::Schema.define(:version => 20090930000238) do
 
   create_table "rsvps", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "company"
     t.integer  "attendees",                      :default => 1
-    t.integer  "likelyhood",                     :default => 2
     t.boolean  "reserved",                       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"

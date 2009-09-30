@@ -5,6 +5,23 @@ class RsvpTest < ActiveSupport::TestCase
   should_validate_presence_of :name, :email
   should_not_allow_mass_assignment_of :reserved, :slug
   
+  
+  context 'Class methods' do
+
+    should 'should return reserved attendees sum' do
+      assert_equal 4, Rsvp.attendees, 'Double check fixtures'
+    end
+    
+    should 'return return open seats if available' do
+      assert Rsvp.attendees < Rsvp::MAX_SEATS, 'Maybe there are too many fixtures :)'
+      assert Rsvp.open_seats?
+      Rsvp.stubs(:attendees => Rsvp::MAX_SEATS)
+      assert !Rsvp.open_seats?
+      assert !Rsvp.new.open_seats?, 'should delegate to class'
+    end
+
+  end
+  
   context 'Instance behavior' do
 
     setup do
@@ -24,12 +41,6 @@ class RsvpTest < ActiveSupport::TestCase
       assert !@rsvp.reserved?
       @rsvp.attributes = {:reserved => true}
       assert !@rsvp.reserved?
-    end
-    
-    should 'have a default likelyhood of 2' do
-      assert_equal 2, @rsvp.likelyhood
-      @rsvp.likelyhood = 3
-      assert_equal 3, @rsvp.likelyhood
     end
     
     should 'create a slug for each new rsvp' do

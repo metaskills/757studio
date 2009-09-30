@@ -1,11 +1,7 @@
 class Rsvp < ActiveRecord::Base
   
+  MAX_SEATS = 55
   ATTENDEE_RANGE = (1..5).to_a.freeze
-  LIKELYHOOD_RANGE = [
-    ['On The Fence',1],
-    ['Almost Certain',2],
-    ['Would Not Miss It!',3]
-  ].freeze
   
   validates_presence_of :name, :email, :slug
   
@@ -22,11 +18,19 @@ class Rsvp < ActiveRecord::Base
       sum :attendees, :conditions => {:reserved => true}
     end
     
+    def open_seats?
+      attendees < MAX_SEATS
+    end
+    
   end
   
   
   def reserved!
     update_attribute :reserved, true unless reserved?
+  end
+  
+  def open_seats?
+    @open_seats ||= self.class.open_seats?
   end
   
   def attendees=(value)

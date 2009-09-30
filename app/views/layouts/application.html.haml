@@ -49,7 +49,9 @@
                 = link_to '[clear]', clear_rsvp_path(current_rsvp), :method => :put
           #rsvp_text
             ATTENDANCE IS FREE!<br/>
-            Space is limited to 55 seats and<br/>
+            Space is limited to 
+            = Rsvp::MAX_SEATS
+            seats and<br/>
             is first come, first served.<br/> 
             RSVP now and reserve yours!
           #rsvp_form{:style => 'display:none;'}
