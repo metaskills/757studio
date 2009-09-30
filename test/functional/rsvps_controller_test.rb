@@ -28,6 +28,19 @@ class RsvpsControllerTest < ActionController::TestCase
   
   end
   
+  context 'For CREATE action' do
+
+    setup do
+      @rsvp_parms = {:name => 'Some Name', :company => 'Some Company', :email => 'some@email.com', :attendees => '1'}
+    end
+
+    should 'be able to create an rsvp with more than one attendee' do
+      @rsvp_parms[:attendees] = 2
+      post :create, :rsvp => @rsvp_parms
+      assert_response :ok
+    end
+
+  end
   
   context 'For MINE action' do
 
