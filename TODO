@@ -1,7 +1,0 @@
-
-* Add a cancel registration button to the "My Registration" page.
-  - Allow admin to reserve as well.
-
-* Add logic that examines total attendees and does the right in view/controller land.
-
-
