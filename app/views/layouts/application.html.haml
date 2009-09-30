@@ -36,7 +36,6 @@
         = yield
       
       #content_right
-      
         #rsvp_stuff{:style => "display:#{current_rsvp && current_rsvp.reserved? ? 'none' : 'block'};"}
           #rsvp_button{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'none' : 'block'};"}
           .flash_indif{:style => "display:#{current_rsvp && !current_rsvp.reserved? && !session[:toggled_reservation] ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
@@ -82,6 +81,10 @@
           #schedule_date November 5th, 2009
           = render_schedule(false)
         
+        #twitterfollow
+          - link_to 'http://twitter.com/757studio' do
+            = image_tag '/images/layout/follow_757studio_on_twitter.png', :class => 'nobor', :alt => 'Follow 757Studio On Twitter'
+          
         #sponsors
         
           %h5 Sponsors
