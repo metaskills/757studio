@@ -32,7 +32,7 @@ module ApplicationHelper
       '6:00 pm Andy Hunt',
       '7:00 pm Clinton Nixon',
       '7:45 pm Jamie Pinkham',
-      '8:15 pm Mixer',
+      '8:30 pm Mixer',
       '9:00 pm Doors Close'
     ]
     if list
