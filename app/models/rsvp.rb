@@ -3,6 +3,9 @@ class Rsvp < ActiveRecord::Base
   MAX_SEATS = 55
   ATTENDEE_RANGE = (1..5).to_a.freeze
   
+  named_scope :reserved, :conditions => {:reserved => true}
+  named_scope :not_reserved, :conditions => {:reserved => false}
+  
   validates_presence_of :name, :email, :slug
   
   serialize :attendee_names, Array
@@ -15,11 +18,15 @@ class Rsvp < ActiveRecord::Base
   class << self
     
     def attendees
-      sum :attendees, :conditions => {:reserved => true}
+      reserved.sum(:attendees)
     end
     
     def open_seats?
       attendees < MAX_SEATS
+    end
+    
+    def send_reminders
+      not_reserved.all.each(&:send_reminder)
     end
     
   end
@@ -45,6 +52,10 @@ class Rsvp < ActiveRecord::Base
   def attendee_names=(names)
     scrubbed_names = names.flatten.reject(&:blank?)
     self[:attendee_names] = scrubbed_names
+  end
+  
+  def send_reminder
+    RsvpMailer.deliver_reminder(self) unless reserved?
   end
   
   

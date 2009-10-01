@@ -3,6 +3,9 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'site'
   
   map.resources :rsvps, 
+                :collection => {
+                  :send_reminders => :post
+                },
                 :member => {
                   :clear => :put, 
                   :mine  => [:get,:put],

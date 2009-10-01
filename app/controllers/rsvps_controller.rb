@@ -63,6 +63,13 @@ class RsvpsController < ApplicationController
     render :action => 'mine'
   end
   
+  def send_reminders
+    reminded = Rsvp.send_reminders
+    reminded_notice = reminded.map { |rsvp| "#{rsvp.name} at #{rsvp.email}" }
+    flash[:good] = "Sent reminders out to the following: #{reminded_notice.to_sentence}"
+    redirect_to rsvps_url
+  end
+  
   
   protected
   

@@ -19,6 +19,10 @@ class RsvpTest < ActiveSupport::TestCase
       assert !Rsvp.open_seats?
       assert !Rsvp.new.open_seats?, 'should delegate to class'
     end
+    
+    should 'return all reminded recipients from send_reminders' do
+      assert_equal [rsvps(:simple)], Rsvp.send_reminders
+    end
 
   end
   

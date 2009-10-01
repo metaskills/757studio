@@ -30,6 +30,33 @@ class RsvpMailerTest < ActionMailer::TestCase
 
   end
   
+  context 'For #reminder' do
+
+    should 'allow each instance of Rsvp to send a reminder if NOT reserved with correct content' do
+      rsvp = rsvps(:simple)
+      assert !rsvp.reserved?
+      assert_emails(1) { rsvp.send_reminder }
+      email = deliveries.first
+      assert_equal rsvp.email, email.to.first
+      assert_equal RsvpMailer::FROM, email.from.first
+      assert_match %r|Reservation Reminder|, email.subject
+      assert_match %r|http:\/\/757studio.org/rsvps/#{rsvp.slug}/mine|m, email.body
+    end
+    
+    should 'not allow each instance of Rsvp to send a reminder if it IS reserved' do
+      rsvp = rsvps(:big)
+      assert rsvp.reserved?
+      assert_no_emails { rsvp.send_reminder }
+    end
+    
+    should 'have a class method that send email to all unreserved RSVPs with correct content' do
+      total_count = Rsvp.not_reserved.count
+      assert_emails(total_count) { Rsvp.send_reminders }
+    end
+
+  end
+  
+  
   
   protected
   
