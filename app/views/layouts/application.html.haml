@@ -39,6 +39,8 @@
       
       #content_right
         #rsvp_stuff{:style => "display:#{current_rsvp && current_rsvp.reserved? ? 'none' : 'block'};"}
+          .flash_alert{:style => "display:#{Rsvp.open_seats? ? 'none' : 'block'};"}
+            All seats reserved! Use the RSVP form to be placed on the waiting list. Follow us on Twitter for updates.
           #rsvp_button{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'none' : 'block'};"}
           .flash_indif{:style => "display:#{current_rsvp && !current_rsvp.reserved? && !session[:toggled_reservation] ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
             Please verify your reservation by clicking the link contained in 

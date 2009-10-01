@@ -1,6 +1,6 @@
 class Rsvp < ActiveRecord::Base
   
-  MAX_SEATS = 55
+  MAX_SEATS = 50
   ATTENDEE_RANGE = (1..5).to_a.freeze
   
   named_scope :reserved, :conditions => {:reserved => true}

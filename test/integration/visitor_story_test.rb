@@ -47,10 +47,15 @@ class VisitorStoryTest < ActionController::IntegrationTest
     assert_element_visible('div#rsvp_stuff')
     assert_element_visible('div#rsvp_button')
     assert_element_hidden('div#content_right div.flash_indif')
-    
   end
   
-  
+  should 'Not see seats reserved message untill max seats have been reached' do
+    get_page :home
+    assert_element_hidden 'div#content_right div.flash_alert'
+    Rsvp.stubs(:open_seats? => false)
+    get_page :home
+    assert_element_visible 'div#content_right div.flash_alert'
+  end
   
   
 end
