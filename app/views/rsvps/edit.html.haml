@@ -6,6 +6,9 @@
 
 %h1 Edit Registration
 
+%p
+  Rsvp's slug link:<br/>
+  = mine_rsvp_url(:id =>@rsvp.slug)
 
 - form_for @rsvp do |r|
   = render :partial => 'edit', :locals => {:r => r}
