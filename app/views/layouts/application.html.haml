@@ -4,6 +4,7 @@
 
   %head
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %title= params[:page] ? "757 Studio - #{params[:page].titleize}" : '757 Studio'
     = stylesheet_link_tag :all, :recursive => true
     = javascript_include_tag 'prototype', 'effects', 'builder', 'application', :cache => 'studio'
     = javascript_tag 'Builder.dump();'
@@ -117,6 +118,12 @@
               Information Systems, Introduction to Programming, iPhone Programming, Java / JVM,
               Languages / Frameworks, Mac Programming, Mobile Programming, Programming Tools, and Web 2.0
 
+        #affiliations{:class => 'mt30 center'}
+          %h5 Affiliations
+          
+          - link_to 'http://hrtc.org/' do
+            = image_tag '/images/content/hrtc_logo.png', :class => 'nobor', :alt => 'Hampton Roads Technology Council'
+          
     #footer
       = bottom_nav
       %br
