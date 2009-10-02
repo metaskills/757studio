@@ -58,12 +58,35 @@ class RsvpTest < ActiveSupport::TestCase
       assert @rsvp.reload.reserved?
     end
     
-    should 'be able to create new unreserved rsvps when open_seats? returns false' do
-      reserve_all_seats!
-      assert_nothing_raised() { @rsvp.save! }
-      @rsvp.toggle(:reserved)
-      assert_raise(ActiveRecord::RecordInvalid) { @rsvp.save! }
-      assert @rsvp.errors.on(:reservation)
+    context 'when all seats are reserved' do
+
+      setup do
+        reserve_all_seats!
+      end
+
+      should 'be able to create new unreserved rsvps' do
+        assert !@rsvp.reserved?
+        assert_nothing_raised() { @rsvp.save! }
+      end
+
+      should 'be allowed to edit non-reserved attributes' do
+        rsvp = rsvps(:big)
+        assert rsvp.reserved?
+        rsvp.email = 'newbig@megacorp.com'
+        rsvp.attendee_names = ['Mr One','Mr Two','Mr Three']
+        assert rsvp.save
+      end
+
+      should 'not be allowed to change rsvp state to reserved' do
+        rsvp = rsvps(:simple)
+        assert !rsvp.reserved?
+        assert_raise(ActiveRecord::RecordInvalid) do 
+          rsvp.toggle(:reserved)
+          rsvp.save!
+        end
+        assert rsvp.errors.on(:reservation)
+      end
+
     end
     
     context 'attendees & serialized attendee_names' do

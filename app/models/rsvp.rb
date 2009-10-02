@@ -62,7 +62,13 @@ class Rsvp < ActiveRecord::Base
   protected
   
   def validate
-    errors.add :reservation, 'can not be confirmed because all seats are currently taken' if reserved? && !open_seats?
+    validate_new_reserved_state
+  end
+  
+  def validate_new_reserved_state
+    if reserved_changed? && reserved?
+      errors.add :reservation, 'can not be confirmed because all seats are currently taken' unless open_seats?
+    end
   end
   
   def default_attendee_names
