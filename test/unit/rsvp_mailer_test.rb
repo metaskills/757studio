@@ -25,7 +25,7 @@ class RsvpMailerTest < ActionMailer::TestCase
       assert_equal @rsvp.email, email.to.first
       assert_equal RsvpMailer::FROM, email.from.first
       assert_match %r|Reservation Confirmation|, email.subject
-      assert_match %r|the following link.*http:\/\/757studio.org/rsvps/#{@rsvp.slug}/mine|m, email.body
+      assert_slug_link_in_body(@rsvp,email)
     end
 
   end
@@ -40,7 +40,7 @@ class RsvpMailerTest < ActionMailer::TestCase
       assert_equal rsvp.email, email.to.first
       assert_equal RsvpMailer::FROM, email.from.first
       assert_match %r|Reservation Reminder|, email.subject
-      assert_match %r|http:\/\/757studio.org/rsvps/#{rsvp.slug}/mine|m, email.body
+      assert_slug_link_in_body(rsvp,email)
     end
     
     should 'not allow each instance of Rsvp to send a reminder if it IS reserved' do
@@ -64,6 +64,53 @@ class RsvpMailerTest < ActionMailer::TestCase
 
   end
   
+  context 'For #open_seat' do
+    
+    setup do
+      @rsvp = rsvps(:simple)
+    end
+    
+    should 'allown instnace of Rsvp to send an open_seat notice if it is not reserved and there is an open seat' do
+      assert Rsvp.open_seats?
+      assert !@rsvp.reserved?
+      @rsvp.send_open_seat
+      assert email = deliveries.first
+      assert_equal @rsvp.email, email.to.first
+      assert_equal RsvpMailer::FROM, email.from.first
+      assert_match %r|Open Seat Notice|, email.subject
+      assert_slug_link_in_body(@rsvp,email)
+    end
+    
+    context 'under a full house' do
+
+      setup do
+        create_count = Rsvp::MAX_SEATS - Rsvp.attendees
+        create_count.times do |n|
+          r = Rsvp.new :name => "Fill Er#{n}", :email => "fill@er#{n}.com"
+          r.reserved = true
+          r.save!
+        end
+        # Subjects
+        @notreserved = rsvps(:simple)
+        @canceler = rsvps(:big)
+        # Testing setup and setup subjects.
+        assert_equal Rsvp::MAX_SEATS, Rsvp.attendees
+        assert !@notreserved.reserved?
+        assert @canceler.reserved?
+      end
+      
+      should 'send an email to non reserved rsvps' do
+        @canceler.toggle(:reserved).save!
+        assert_equal 1, deliveries.size, 'make sure we find the one for delivered to @notreserved if this is more in here'
+        assert email = deliveries.first
+        assert_equal @notreserved.email, email.to.first
+        assert_match %r|Open Seat Notice|, email.subject
+      end
+
+    end
+
+  end
+  
   
   
   protected
@@ -71,5 +118,10 @@ class RsvpMailerTest < ActionMailer::TestCase
   def deliveries
     ActionMailer::Base.deliveries
   end
+  
+  def assert_slug_link_in_body(rsvp,email)
+    assert_match %r|http:\/\/757studio.org/rsvps/#{rsvp.slug}/mine|m, email.body
+  end
+  
   
 end

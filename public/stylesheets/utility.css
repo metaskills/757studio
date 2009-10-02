@@ -16,6 +16,7 @@
 .floatr          { float:right; display:inline; }
 .floatl          { float:left; display:inline; }
 .inline          { display:inline !important; }
+.inline_all *    { display:inline !important; }
 .pointer         { cursor:pointer !important; }
 .nobor,
 .nobor *         { border-width: 0px !important; border-style: none !important; border-color: transparent !important; text-decoration: none !important;  }

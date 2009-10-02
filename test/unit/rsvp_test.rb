@@ -32,6 +32,36 @@ class RsvpTest < ActiveSupport::TestCase
       @rsvp = Rsvp.new(:name => 'Test', :email => 'test@test.com')
     end
     
+    should 'memoize open_seats? class delegate' do
+      Rsvp.expects(:open_seats?).once
+      @rsvp.open_seats?
+      @rsvp.open_seats?
+    end
+    
+    should 'allow true arg to open_seats? to kill cache' do
+      Rsvp.expects(:open_seats?).twice
+      @rsvp.open_seats?
+      @rsvp.open_seats?(true)
+    end
+    
+    context 'for @seats_were_maxed instance var state save' do
+
+      should 'record false if seats were open' do
+        Rsvp.expects(:send_open_seat).never
+        assert Rsvp.open_seats?
+        assert @rsvp.save
+        assert_equal false, @rsvp.instance_variable_get(:@seats_were_maxed)
+      end
+      
+      should 'record true if seats were not open' do
+        Rsvp.expects(:send_open_seat).never
+        reserve_all_seats!
+        assert @rsvp.save
+        assert_equal true, @rsvp.instance_variable_get(:@seats_were_maxed)
+      end
+
+    end
+    
     should 'never allow attendees to be 0' do
       @rsvp.attendee_names = []
       assert_equal 1, @rsvp.attendees

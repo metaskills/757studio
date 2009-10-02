@@ -1,14 +1,11 @@
 
 = render_rsvp_errors
 
-%div{:class => 'floatr'}
+%div{:class => 'floatr inline_all'}
   = button_to '« All RSVPs', rsvps_path, :method => :get
+  = button_to 'Their Slug »', mine_rsvp_url(:id =>@rsvp.slug), :method => :get
 
 %h1 Edit Registration
-
-%p
-  Rsvp's slug link:<br/>
-  = link_to mine_rsvp_url(:id =>@rsvp.slug), mine_rsvp_url(:id =>@rsvp.slug)
 
 - form_for @rsvp do |r|
   = render :partial => 'edit', :locals => {:r => r}
