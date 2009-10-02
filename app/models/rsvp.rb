@@ -13,7 +13,7 @@ class Rsvp < ActiveRecord::Base
   
   before_validation :create_slug
   before_save  :sync_attendee_info
-  after_create :send_email
+  after_create :send_reservation
   
   class << self
     
@@ -58,6 +58,10 @@ class Rsvp < ActiveRecord::Base
     RsvpMailer.deliver_reminder(self) unless reserved?
   end
   
+  def send_reservation
+    RsvpMailer.deliver_reservation(self) unless reserved?
+  end
+  
   
   protected
   
@@ -82,10 +86,6 @@ class Rsvp < ActiveRecord::Base
   
   def create_slug
     self[:slug] ||= ActiveSupport::SecureRandom.hex(10)
-  end
-  
-  def send_email
-    RsvpMailer.deliver_reservation(self) unless reserved?
   end
   
   
