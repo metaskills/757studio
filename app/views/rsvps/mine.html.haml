@@ -13,8 +13,9 @@
   please let us know if your reservation changes!
 
 %p
-  If see a "No Seats Available" message, please be patient and follow us on Twitter
-  at 757studio where we may announce openings as they become available.
+  If you see a <strong>"No Seats Available"</strong> message, please be patient. 
+  This site is setup to email all attendees on the waiting list as soon as an opening 
+  becomes available. Announcements may also appear on our Twitter page.
 
 - form_for @rsvp, :url => mine_rsvp_path(:id => @rsvp.slug) do |r|
   = render :partial => 'edit', :locals => {:r => r}

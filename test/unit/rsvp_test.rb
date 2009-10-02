@@ -15,7 +15,7 @@ class RsvpTest < ActiveSupport::TestCase
     should 'return return open seats if available' do
       assert Rsvp.attendees < Rsvp::MAX_SEATS, 'Maybe there are too many fixtures :)'
       assert Rsvp.open_seats?
-      Rsvp.stubs(:attendees => Rsvp::MAX_SEATS)
+      reserve_all_seats!
       assert !Rsvp.open_seats?
       assert !Rsvp.new.open_seats?, 'should delegate to class'
     end
@@ -58,8 +58,8 @@ class RsvpTest < ActiveSupport::TestCase
       assert @rsvp.reload.reserved?
     end
     
-    should 'be able to create new unreserved rsvps when open seats are false' do
-      Rsvp.stubs(:open_seats? => false)
+    should 'be able to create new unreserved rsvps when open_seats? returns false' do
+      reserve_all_seats!
       assert_nothing_raised() { @rsvp.save! }
       @rsvp.toggle(:reserved)
       assert_raise(ActiveRecord::RecordInvalid) { @rsvp.save! }

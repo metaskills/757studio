@@ -52,7 +52,7 @@ class VisitorStoryTest < ActionController::IntegrationTest
   should 'Not see seats reserved message untill max seats have been reached' do
     get_page :home
     assert_element_hidden 'div#content_right div.flash_alert'
-    Rsvp.stubs(:open_seats? => false)
+    reserve_all_seats!
     get_page :home
     assert_element_visible 'div#content_right div.flash_alert'
   end

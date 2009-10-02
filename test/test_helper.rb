@@ -16,6 +16,10 @@ class ActiveSupport::TestCase
     get site_path(name.to_s)
   end
   
+  def reserve_all_seats!(count=Rsvp::MAX_SEATS)
+    Rsvp.stubs(:attendees => count)
+  end
+  
   def login_as_admin
     returning admin = users(:admin) do
       @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("#{admin.email}:#{admin.password}")

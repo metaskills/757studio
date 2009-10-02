@@ -53,6 +53,14 @@ class RsvpMailerTest < ActionMailer::TestCase
       total_count = Rsvp.not_reserved.count
       assert_emails(total_count) { Rsvp.send_reminders }
     end
+    
+    should 'not send reminders if there are no seats available' do
+      assert Rsvp.all.any?{ |rsvp| !rsvp.reserved? }, 'making sure there is someone to potentially mail'
+      reserve_all_seats!
+      assert_no_emails do 
+        assert_equal [], Rsvp.send_reminders, 'should return an empty array'
+      end
+    end
 
   end
   

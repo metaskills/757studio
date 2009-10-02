@@ -26,7 +26,7 @@ class Rsvp < ActiveRecord::Base
     end
     
     def send_reminders
-      not_reserved.all.each(&:send_reminder)
+      open_seats? ? not_reserved.all.each(&:send_reminder) : []
     end
     
   end
