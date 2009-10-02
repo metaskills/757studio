@@ -29,12 +29,12 @@ class VisitorStoryTest < ActionController::IntegrationTest
     # Get Presenters page again, not see post RSVP flash message, then make a reservation.
     get_page :presenters
     assert_element_visible('div#rsvp_button')
-    assert_element_hidden('div#content_right div.flash_indif')
+    assert_element_hidden('#rsvp_flash_indif')
     post rsvps_path, :rsvp => {:name => 'Some Name', :company => 'Some Company', :email => 'some@email.com', :attendees => '1'}
     assert_response :ok
     get_page :presenters
     assert_element_hidden('div#rsvp_button')
-    assert_element_visible('div#content_right div.flash_indif')
+    assert_element_visible('#rsvp_flash_indif')
     # Let's assume we clicked the link in the email
     rsvp = Rsvp.first
     get mine_rsvp_path(:id =>rsvp.slug)
@@ -49,12 +49,28 @@ class VisitorStoryTest < ActionController::IntegrationTest
     assert_element_hidden('div#content_right div.flash_indif')
   end
   
-  should 'Not see seats reserved message untill max seats have been reached' do
+  should 'Not see seats reserved message until max seats have been reached' do
     get_page :home
-    assert_element_hidden 'div#content_right div.flash_alert'
+    assert_element_hidden '#rsvp_flash_alert'
     reserve_all_seats!
     get_page :home
-    assert_element_visible 'div#content_right div.flash_alert'
+    assert_element_visible '#rsvp_flash_alert'
+  end
+  
+  should 'Not be allowed to confirm reservation when house is full' do
+    reserve_all_seats!
+    rsvp_email = 'unlucky@email.com'
+    post rsvps_path, :rsvp => {:name => 'Some Name', :company => 'Some Company', :email => rsvp_email, :attendees => '1'}
+    assert_response :ok
+    assert rsvp = Rsvp.find_by_email(rsvp_email)
+    assert_equal rsvp.id, session[:rsvp_id]
+    assert !rsvp.reserved?
+    get mine_rsvp_path(:id =>rsvp.slug)
+    assert_response :success
+    rsvp.reload
+    assert !rsvp.reserved?
+    assert_nil session[:rsvp_id]
+    assert_element_hidden '#rsvp_flash_indif'
   end
   
   

@@ -40,7 +40,7 @@ class Rsvp < ActiveRecord::Base
   
   
   def reserved!
-    update_attribute :reserved, true unless reserved?
+    update_attribute :reserved, true if open_seats? && !reserved?
   end
   
   def open_seats?
