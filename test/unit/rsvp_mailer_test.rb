@@ -111,6 +111,33 @@ class RsvpMailerTest < ActionMailer::TestCase
 
   end
   
+  context 'For #upcoming_event_reminder' do
+
+    should 'send emails to all Rsvps with different body content depending on their current state' do
+      Rsvp.stubs :event_date => Date.today+3.days
+      RsvpMailer.deliver_upcoming_event_reminders
+      assert_equal Rsvp.count, deliveries.size
+      # Unreserved Email
+      assert email_for_simple = deliveries.detect { |email| rsvps(:simple).email == email.to.first }
+      assert_match %r|WAITING|, email_for_simple.subject
+      assert_match %r|The event is only 3 days|, email_for_simple.body
+      assert_match %r|you are on the waiting list|, email_for_simple.body
+      # Reserved Email
+      assert email_for_big = deliveries.detect { |email| rsvps(:big).email == email.to.first }
+      assert_match %r|RESERVED|, email_for_big.subject
+      assert_match %r|The event is only 3 days|, email_for_big.body
+      assert_match %r|please let us know if your reservation changes|, email_for_big.body
+    end
+    
+    should 'send email with body that says even is TODAY when it is today' do
+      Rsvp.stubs :event_date => Date.today
+      RsvpMailer.deliver_upcoming_event_reminders
+      assert_match %r|Today is the day!|, deliveries.first.body
+    end
+
+  end
+  
+  
   
   
   protected

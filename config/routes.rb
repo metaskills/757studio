@@ -4,7 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :rsvps, 
                 :collection => {
-                  :send_reminders => :post
+                  :send_reminders => :post,
+                  :send_upcoming_reminders => :post
                 },
                 :member => {
                   :clear => :put, 

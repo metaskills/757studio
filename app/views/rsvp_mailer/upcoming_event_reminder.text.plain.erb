@@ -1,0 +1,17 @@
+
+757 Studio Attendee,
+
+<%- if Rsvp.event_today? -%>
+Today is the day!
+<%- else -%>
+The event is only <%= (Rsvp.event_date-Date.today).days.inspect %> away!
+<%- end -%>
+
+<%- if @rsvp.reserved? -%>
+<%= mine_rsvp_url(:id =>@rsvp.slug) %>
+
+From this page, you will be able to edit your number of attendees and their names. If needed you will also be able to cancel your reservation with this link. Seating is limited, so please let us know if your reservation changes.
+<%- else -%>
+Seats are currently filled and you are on the waiting list. But when and if anyone cancels their reservation, you will receive an email with a chance to claim their seat. 
+<%- end -%>
+

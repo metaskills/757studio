@@ -70,6 +70,12 @@ class RsvpsController < ApplicationController
     redirect_to rsvps_url
   end
   
+  def send_upcoming_reminders
+    RsvpMailer.deliver_upcoming_event_reminders
+    flash[:good] = "Sent upcoming event reminders to #{Rsvp.count} people."
+    redirect_to rsvps_url
+  end
+  
   
   protected
   

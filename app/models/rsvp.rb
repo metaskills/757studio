@@ -1,7 +1,7 @@
 class Rsvp < ActiveRecord::Base
   
   extend ActiveSupport::Memoizable
-  
+
   MAX_SEATS = 50
   ATTENDEE_RANGE = (1..5).to_a.freeze
   
@@ -34,6 +34,14 @@ class Rsvp < ActiveRecord::Base
     
     def send_open_seats(exception=nil)
       open_seats? ? not_reserved.all.reject{ |r| r == exception }.each{ |r| r.send_open_seat(true) } : []
+    end
+    
+    def event_date
+      Date.parse('2009-11-05')
+    end
+    
+    def event_today?
+      event_date == Date.today
     end
     
   end
