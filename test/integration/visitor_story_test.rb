@@ -4,6 +4,7 @@ class VisitorStoryTest < ActionController::IntegrationTest
   
   def setup
     Rsvp.delete_all
+    Rsvp.stubs :event_passed? => false
   end
   
   should 'A basic user path' do

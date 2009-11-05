@@ -44,6 +44,10 @@ class Rsvp < ActiveRecord::Base
       event_date == Date.today
     end
     
+    def event_passed?
+      event_date < Date.today
+    end
+    
   end
   
   

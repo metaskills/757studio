@@ -38,52 +38,53 @@
         = yield
       
       #content_right
-        #rsvp_stuff{:style => "display:#{current_rsvp && current_rsvp.reserved? ? 'none' : 'block'};"}
-          .flash_alert{:style => "display:#{Rsvp.open_seats? ? 'none' : 'block'};", :id => 'rsvp_flash_alert'}
-            All seats reserved! Use the RSVP form to be placed on the waiting list. Follow us on Twitter for updates.
-          #rsvp_button{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'none' : 'block'};"}
-          .flash_indif{:style => "display:#{session[:rsvp_id] ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
-            Please verify your reservation by clicking the link contained in 
-            the email we sent to you at: <strong id="your_rsvp_email">
-            = current_rsvp.try(:email)
-            </strong>
-            - if current_rsvp
-              %div{:class => 'mt5 right'}
-                = link_to '[remove message]', clear_rsvp_path(current_rsvp), :method => :put
-          #rsvp_text
-            ATTENDANCE IS FREE!<br/>
-            Space is limited to 
-            = Rsvp::MAX_SEATS
-            seats and<br/>
-            is first come, first served.<br/> 
-            RSVP now and reserve yours!
-          #rsvp_form{:style => 'display:none;'}
-            .flash_bad{:style => 'display:none;', :id => 'rsvp_flash_bad'}
-            - form_for @rsvp do |f|
-              %table.form_table
-                %tr
-                  %th Name
-                  %td= f.text_field :name
-                %tr
-                  %th Company
-                  %td= f.text_field :company
-                %tr
-                  %th Email
-                  %td= f.text_field :email
-                %tr
-                  %th Attendees
-                  %td= f.select :attendees, Rsvp::ATTENDEE_RANGE
-                %tr
-                  %th
-                  %td{:class => 'vmiddle_all'}
-                    = submit_tag 'RSVP Now', :id => 'rsvp_submit'
-                    %input{:type => 'button', :value => 'Cancel', :id => 'rsvp_cancel'}
-                    = image_tag '/images/layout/loading_invert.gif', :id => 'rsvp_loading', :style => 'display:none;'
-        
-        #schedule
-          %h5 Schedule
-          #schedule_date November 5th, 2009
-          = render_schedule(false)
+      
+        - unless Rsvp.event_passed?
+          #rsvp_stuff{:style => "display:#{current_rsvp && current_rsvp.reserved? ? 'none' : 'block'};"}
+            .flash_alert{:style => "display:#{Rsvp.open_seats? ? 'none' : 'block'};", :id => 'rsvp_flash_alert'}
+              All seats reserved! Use the RSVP form to be placed on the waiting list. Follow us on Twitter for updates.
+            #rsvp_button{:style => "display:#{current_rsvp && !current_rsvp.reserved? ? 'none' : 'block'};"}
+            .flash_indif{:style => "display:#{session[:rsvp_id] ? 'block' : 'none'};", :id => 'rsvp_flash_indif'}
+              Please verify your reservation by clicking the link contained in 
+              the email we sent to you at: <strong id="your_rsvp_email">
+              = current_rsvp.try(:email)
+              </strong>
+              - if current_rsvp
+                %div{:class => 'mt5 right'}
+                  = link_to '[remove message]', clear_rsvp_path(current_rsvp), :method => :put
+            #rsvp_text
+              ATTENDANCE IS FREE!<br/>
+              Space is limited to 
+              = Rsvp::MAX_SEATS
+              seats and<br/>
+              is first come, first served.<br/> 
+              RSVP now and reserve yours!
+            #rsvp_form{:style => 'display:none;'}
+              .flash_bad{:style => 'display:none;', :id => 'rsvp_flash_bad'}
+              - form_for @rsvp do |f|
+                %table.form_table
+                  %tr
+                    %th Name
+                    %td= f.text_field :name
+                  %tr
+                    %th Company
+                    %td= f.text_field :company
+                  %tr
+                    %th Email
+                    %td= f.text_field :email
+                  %tr
+                    %th Attendees
+                    %td= f.select :attendees, Rsvp::ATTENDEE_RANGE
+                  %tr
+                    %th
+                    %td{:class => 'vmiddle_all'}
+                      = submit_tag 'RSVP Now', :id => 'rsvp_submit'
+                      %input{:type => 'button', :value => 'Cancel', :id => 'rsvp_cancel'}
+                      = image_tag '/images/layout/loading_invert.gif', :id => 'rsvp_loading', :style => 'display:none;'
+          #schedule
+            %h5 Schedule
+            #schedule_date November 5th, 2009
+            = render_schedule(false)
         
         #twitterfollow
           - link_to 'http://twitter.com/757studio' do
