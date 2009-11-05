@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  rsvp_id: 1
+  a1t: MyText
+  a2t: MyText
+  a3t: MyText
+  a4t: MyText
+  a1b: false
+  a2b: false
+
+two:
+  rsvp_id: 1
+  a1t: MyText
+  a2t: MyText
+  a3t: MyText
+  a4t: MyText
+  a1b: false
+  a2b: false

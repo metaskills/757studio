@@ -25,5 +25,14 @@ module RsvpsHelper
     end
   end
   
+  def survey_question_field(attribute)
+    case attribute.to_s.last
+    when 't'
+      text_area_tag "survey[#{attribute}]", @survey.send(attribute), :class => 'w80p h140 mt5 p10', :style => 'color:#fff; background-color:#333; font-size:18px;'
+    when 'b'
+      select_tag "survey[#{attribute}]", options_for_select([['',''],['Yes','true'],['No','false']],@survey.send(attribute).nil? ? '' : @survey.send("#{attribute}?").to_s), :style => 'font-size:18px;'
+    end
+  end
+  
   
 end

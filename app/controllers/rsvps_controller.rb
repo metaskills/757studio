@@ -1,6 +1,6 @@
 class RsvpsController < ApplicationController
   
-  before_filter :admin_required, :except => [:create,:clear,:mine,:toggle_reservation]
+  before_filter :admin_required, :except => [:create,:clear,:mine,:toggle_reservation,:survey]
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
@@ -61,6 +61,16 @@ class RsvpsController < ApplicationController
     redirect_to mine_rsvp_url(:id => @rsvp.slug)
   rescue ActiveRecord::RecordInvalid
     render :action => 'mine'
+  end
+  
+  def survey
+    find_by_slug
+    @survey = @rsvp.survey || @rsvp.build_survey
+    if request.post?
+      @survey.update_attributes!(params[:survey])
+      flash[:good] = "Thanks for taking the time to fill this out."
+      redirect_to survey_rsvp_url(:id => @rsvp.slug)
+    end
   end
   
   def send_reminders

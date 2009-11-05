@@ -1,0 +1,13 @@
+
+%h1{:class => 'mt20'}
+  My Survey
+
+
+- form_tag survey_rsvp_path(:id => @rsvp.slug) do
+  - Survey::QUESTIONS.each do |attribute,question|
+    %div{:class => 'mb30', :id => "survey_#{attribute}"}
+      %h3{:class => 'italic'}
+        = question
+      = survey_question_field(attribute)
+    %div{:class => 'mt20'}
+  = submit_tag 'Save Survey', :style => 'font-size:18px;'

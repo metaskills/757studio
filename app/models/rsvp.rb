@@ -8,6 +8,8 @@ class Rsvp < ActiveRecord::Base
   named_scope :reserved, :conditions => {:reserved => true}
   named_scope :not_reserved, :conditions => {:reserved => false}
   
+  has_one :survey
+  
   validates_presence_of :name, :email, :slug
   
   serialize :attendee_names, Array

@@ -10,7 +10,8 @@ ActionController::Routing::Routes.draw do |map|
                 :member => {
                   :clear => :put, 
                   :mine  => [:get,:put],
-                  :toggle_reservation => :put
+                  :toggle_reservation => :put,
+                  :survey => [:get,:post]
                 }
   
   map.site    ':page',  :controller => 'site',  :action => 'show'

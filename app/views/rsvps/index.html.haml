@@ -25,6 +25,7 @@
     %th Company
     %th Attendees
     %th Reserved
+    %th Survey
     %th Actions
   - @rsvps.each_with_index do |r,i|
     %tr{:class => cycle('even','odd')}
@@ -33,6 +34,7 @@
       %td= r.company
       %td= r.attendees
       %td= image_tag('/images/layout/good.png') if r.reserved?
+      %td= link_to(image_tag('/images/layout/good.png'),survey_rsvp_path(r)) if r.survey.present?
       %td{:class => 'nowrap'}
         = link_to '[Edit]', edit_rsvp_path(r)
         - if Rails.env.development?
