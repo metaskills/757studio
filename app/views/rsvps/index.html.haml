@@ -34,7 +34,7 @@
       %td= r.company
       %td= r.attendees
       %td= image_tag('/images/layout/good.png') if r.reserved?
-      %td= link_to(image_tag('/images/layout/good.png'),survey_rsvp_path(r)) if r.survey.present?
+      %td= link_to(image_tag('/images/layout/good.png'),survey_rsvp_path(:id=>r.slug),:class=>'nobor') if r.survey.present?
       %td{:class => 'nowrap'}
         = link_to '[Edit]', edit_rsvp_path(r)
         - if Rails.env.development?

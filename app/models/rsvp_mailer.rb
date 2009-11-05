@@ -8,6 +8,10 @@ class RsvpMailer < ActionMailer::Base
       Rsvp.all.each { |rsvp| self.deliver_upcoming_event_reminder(rsvp) }
     end
     
+    def deliver_surveys
+      Rsvp.reserved.all.each { |rsvp| self.deliver_survey(rsvp) }
+    end
+    
   end
   
   def reservation(rsvp)
@@ -27,6 +31,11 @@ class RsvpMailer < ActionMailer::Base
   
   def upcoming_event_reminder(rsvp)
     subject "757 Studio [#{rsvp.reserved? ? 'RESERVED' : 'WAITING'}]"
+    assign_common_attributes(rsvp)
+  end
+  
+  def survey
+    subject "757 Studio Survey"
     assign_common_attributes(rsvp)
   end
   
