@@ -34,7 +34,7 @@ class RsvpMailer < ActionMailer::Base
     assign_common_attributes(rsvp)
   end
   
-  def survey
+  def survey(rsvp)
     subject "757 Studio Survey"
     assign_common_attributes(rsvp)
   end

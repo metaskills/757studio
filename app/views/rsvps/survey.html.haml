@@ -4,10 +4,10 @@
 
 
 - form_tag survey_rsvp_path(:id => @rsvp.slug) do
-  - Survey::QUESTIONS.each do |attribute,question|
-    %div{:class => 'mb30', :id => "survey_#{attribute}"}
+  - Survey::QUESTIONS.each do |qdata|
+    %div{:class => 'mb30', :id => "survey_#{qdata[:attr]}"}
       %h3{:class => 'italic'}
-        = question
-      = survey_question_field(attribute)
+        = qdata[:question]
+      = survey_question_field(qdata[:attr])
     %div{:class => 'mt20'}
   = submit_tag 'Save Survey', :style => 'font-size:18px;'
